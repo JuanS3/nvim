@@ -112,5 +112,8 @@ require('lazy').setup(
 
     -- Indent guides
     { 'lukas-reineke/indent-blankline.nvim', main = 'ibl' },
+
+    -- Highlights colors
+    { 'brenoprata10/nvim-highlight-colors' }
   }
 )
