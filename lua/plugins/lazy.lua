@@ -109,5 +109,8 @@ require('lazy').setup(
       as = 'codesnap',
       build = 'make build_generator',
     },
+
+    -- Indent guides
+    { 'lukas-reineke/indent-blankline.nvim', main = 'ibl' },
   }
 )
