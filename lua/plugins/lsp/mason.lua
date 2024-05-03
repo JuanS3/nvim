@@ -29,11 +29,11 @@ mason_lspconfig.setup({
   }
 })
 
-mason_lspconfig.setup_handlers({
-  function (server_name)
-    require("lspconfig")[server_name].setup({})
-  end
-})
+-- mason_lspconfig.setup_handlers({
+--   function (server_name)
+--     require("lspconfig")[server_name].setup({})
+--   end
+-- })
 
 local ok, mason_null_ls = pcall(require, "mason-null-ls")
 if not ok then

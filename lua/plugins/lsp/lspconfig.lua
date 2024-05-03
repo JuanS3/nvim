@@ -1,12 +1,9 @@
-local ok, lspconfig = pcall(require, "lspconfig")
-if not ok then
-  return
-end
+local lspconfig = require("lspconfig")
 
 local on_attach = function(client, bufnr)
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr })
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
-  -- keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr })
   vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { buffer = bufnr })
   vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { buffer = bufnr })
@@ -16,8 +13,24 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, { buffer = bufnr })
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = bufnr })
   vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = bufnr })
-  vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr })
+  vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, { buffer = bufnr })
   vim.keymap.set("n", "<leader>f", function()
     vim.lsp.buf.format({ async = true })
   end, { buffer = bufnr })
 end
+
+lspconfig.lua_ls.setup({ on_attach = on_attach })
+lspconfig.pyright.setup({ on_attach = on_attach })
+lspconfig.tsserver.setup({ on_attach = on_attach })
+lspconfig.rust_analyzer.setup({ on_attach = on_attach })
+lspconfig.jsonls.setup({ on_attach = on_attach })
+lspconfig.yamlls.setup({ on_attach = on_attach })
+lspconfig.dockerls.setup({ on_attach = on_attach })
+lspconfig.clangd.setup({ on_attach = on_attach })
+lspconfig.bashls.setup({ on_attach = on_attach })
+lspconfig.html.setup({ on_attach = on_attach })
+lspconfig.cssls.setup({ on_attach = on_attach })
+lspconfig.marksman.setup({ on_attach = on_attach })
+lspconfig.ltex.setup({ on_attach = on_attach })
+lspconfig.sqlls.setup({ on_attach = on_attach })
+
