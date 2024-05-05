@@ -41,5 +41,5 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 
 -- move to underscores with - and l (repeatable with ";")
--- vim.keymap.set({ "n", "v" }, "<leader>-", "f_", { silent = true })
--- vim.keymap.set({ "n", "v" }, "<leader>l", "F_", { silent = true })
+vim.keymap.set({ "n", "v" }, "<leader>-", "f_", { silent = true })
+vim.keymap.set({ "n", "v" }, "<leader>l", "F_", { silent = true })
