@@ -25,5 +25,5 @@ vim.keymap.set("n", "<C-b>r", ":NvimTreeRefresh<CR>")
 vim.cmd([[ autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif ]]) -- close nvim-tree on last buffer
 
 -- open nvim-tree on startup
-vim.cmd("autocmd VimEnter * NvimTreeToggle")
+-- vim.cmd("autocmd VimEnter * NvimTreeToggle")
 
