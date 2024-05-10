@@ -33,9 +33,6 @@ require('lazy').setup(
       build = function() vim.fn["mkdp#util#install"]() end,
     },
 
-    -- Fancier statusline
-    { 'nvim-lualine/lualine.nvim' }, -- statusline with icons and lsp status in lua
-
     -- Fuzzy Finder (files, lsp, etc)
     {
       'nvim-telescope/telescope.nvim',
