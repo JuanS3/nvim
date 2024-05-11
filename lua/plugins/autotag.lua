@@ -1,1 +1,1 @@
-require('autotag').setup()
+require('nvim-ts-autotag').setup({})
