@@ -111,6 +111,9 @@ require('lazy').setup(
     { 'lukas-reineke/indent-blankline.nvim', main = 'ibl' },
 
     -- Highlights colors
-    { 'brenoprata10/nvim-highlight-colors' }
+    { 'brenoprata10/nvim-highlight-colors' },
+
+    -- Autotag
+    { 'windwp/nvim-ts-autotag' }
   }
 )
