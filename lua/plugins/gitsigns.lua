@@ -55,3 +55,6 @@ gitsigns.setup({
   },
 
 })
+
+vim.keymap.set("n", "<leader>gb", ":Git blame<cr>")
+vim.keymap.set("n", "<leader>gs", ":Gitsigns stage_hunk<cr>")
