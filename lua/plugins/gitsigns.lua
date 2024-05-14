@@ -6,12 +6,12 @@ end
 gitsigns.setup({
 
   signs = {
-    add = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-    change = { hl = "GitSignsChange", text = "▎", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-    delete = { hl = "GitSignsDelete", text = "-", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
-    topdelete = { hl = "GitSignsDelete", text = "‾", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
+    add = { hl = "GitSignsAdd", text = "󰌴", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+    change = { hl = "GitSignsChange", text = "󰑌", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
+    delete = { hl = "GitSignsDelete", text = "󰗨", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
+    topdelete = { hl = "GitSignsDelete", text = "󰗨", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
     changedelete = { hl = "GitSignsChange", text = "~", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
-    untracked = { hl = "GitSignsAdd", text = "┆", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
+    untracked = { hl = "GitSignsAdd", text = "󱁖", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
   },
 
   signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
@@ -55,6 +55,3 @@ gitsigns.setup({
   },
 
 })
-
-vim.keymap.set("n", "<leader>gb", ":Git blame<cr>")
-vim.keymap.set("n", "<leader>gs", ":Gitsigns stage_hunk<cr>")
