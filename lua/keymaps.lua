@@ -30,7 +30,7 @@ vim.keymap.set("n", "<leader>x", ":bd<cr>") -- close buffer
 vim.keymap.set("n", "<leader>m", ":b#<cr>") -- switch to last buffer
 
 -- unhilight
- -- vim.keymap.set("n", "<leader>h", ":noh<cr>") -- unhilight on search results and cursor position highlight
+-- vim.keymap.set("n", "<leader>h", ":noh<cr>") -- unhilight on search results and cursor position highlight
 
 -- move to beginning/end of line
 vim.keymap.set({"n", "v"}, "H", "^")
