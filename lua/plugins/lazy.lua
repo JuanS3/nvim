@@ -43,7 +43,6 @@ require('lazy').setup(
 
     -- Slidebar
     { 'nvim-tree/nvim-tree.lua' }, -- file explorer tree view
-    { 'nvim-tree/nvim-web-devicons' }, -- optional, for file icons
 
     -- tree-sitter syntax
     {
@@ -66,15 +65,13 @@ require('lazy').setup(
     { 'glepnir/lspsaga.nvim', branch = 'main' }, -- LSP UI
     { 'jose-elias-alvarez/null-ls.nvim' }, -- for formatters and linters
     { 'onsails/lspkind.nvim' }, -- LSP icons
+    { 'VonHeikemen/lsp-zero.nvim' },
 
     -- Cmp
     { 'hrsh7th/nvim-cmp' }, -- completion plugin
     { 'hrsh7th/cmp-nvim-lsp' }, -- LSP source for nvim-cmp
     { 'saadparwaiz1/cmp_luasnip' }, -- Snippets source for nvim-cmp
     { 'L3MON4D3/LuaSnip' }, -- Snippets plugin
-
-    -- LSP Zero
-    { 'VonHeikemen/lsp-zero.nvim' },
 
     -- Autopairs
     { 'windwp/nvim-autopairs' }, -- Autopairs, integrates with both cmp and treesitter
@@ -114,6 +111,12 @@ require('lazy').setup(
     { 'brenoprata10/nvim-highlight-colors' },
 
     -- Autotag
-    { 'windwp/nvim-ts-autotag' }
+    { 'windwp/nvim-ts-autotag' },
+
+    -- Bufferline
+    {
+      'akinsho/bufferline.nvim', as = 'bufferline',
+      dependencies = { 'nvim-tree/nvim-web-devicons' },
+    },
   }
 )
