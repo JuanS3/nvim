@@ -8,7 +8,7 @@ vim.opt.expandtab = true -- convert tabs to spaces
 vim.opt.smartindent = true -- smart indentation
 vim.opt.clipboard = "unnamedplus" -- use system clipboard
 
--- vim.wo.wrap = false -- do not wrap lines
+vim.wo.wrap = false -- do not wrap lines
 vim.opt.autoindent = true -- auto indentation
 vim.opt.list = true -- show tab characters and trailing whitespace
 vim.opt.formatoptions:remove("t") -- no auto-intent of line breaks, keep line wrap enabled
