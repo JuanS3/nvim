@@ -1,7 +1,4 @@
-local ok, lspsaga = pcall(require, "lspsaga")
-if not ok then
-  return
-end
+local lspsaga = require('lspsaga')
 
 lspsaga.setup({
 
@@ -16,3 +13,5 @@ lspsaga.setup({
   }
 
 })
+
+vim.keymap.set('n', '<leader>t', '<cmd>Lspsaga term_toggle<cr>')

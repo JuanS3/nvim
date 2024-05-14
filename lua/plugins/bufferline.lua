@@ -3,7 +3,7 @@ require('bufferline').setup({
     offsets = {
       {
         filetype = "NvimTree",
-        text = '{- File Explorer -}',
+        text = '⦗ One Code ⦘',
         highlight = 'Directory',
         text_align = 'center',
       },
