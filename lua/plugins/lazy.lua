@@ -1,12 +1,12 @@
 -- Install lazylazy
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable',
     lazypath,
   })
 end
@@ -25,10 +25,10 @@ require('lazy').setup(
 
     -- Markdown preview
     {
-      "iamcco/markdown-preview.nvim",
-      cmd = { "MarkdownPreviewToggle" },
-      ft = { "markdown" },
-      build = function() vim.fn["mkdp#util#install"]() end,
+      'iamcco/markdown-preview.nvim',
+      cmd = { 'MarkdownPreviewToggle' },
+      ft = { 'markdown' },
+      build = function() vim.fn['mkdp#util#install']() end,
     },
 
     -- Fuzzy Finder (files, lsp, etc)
@@ -36,7 +36,7 @@ require('lazy').setup(
       'nvim-telescope/telescope.nvim',
       branch = '0.1.x',
       dependencies = { 'nvim-lua/plenary.nvim' }
-    }, -- fuzzy finder for files and lsp results
+    },                                           -- fuzzy finder for files and lsp results
     { 'nvim-telescope/telescope-symbols.nvim' }, -- symbols in Telescope finder
 
     -- Slidebar
@@ -53,28 +53,28 @@ require('lazy').setup(
         'JoosepAlviste/nvim-ts-context-commentstring',
         'p00f/nvim-ts-rainbow',
       },
-    }, -- syntax highlighting
+    },                                             -- syntax highlighting
     { 'nvim-treesitter/nvim-treesitter-context' }, -- show context
 
     -- LSP
-    { 'neovim/nvim-lspconfig' }, -- enable LSP
-    { 'williamboman/mason.nvim' }, -- simple to use language server installer
-    { 'williamboman/mason-lspconfig.nvim' }, -- simple to use language server installer
-    { 'glepnir/lspsaga.nvim', branch = 'main' }, -- LSP UI
-    { 'jose-elias-alvarez/null-ls.nvim' }, -- for formatters and linters
-    { 'onsails/lspkind.nvim' }, -- LSP icons
+    { 'neovim/nvim-lspconfig' },                 -- enable LSP
+    { 'williamboman/mason.nvim' },               -- simple to use language server installer
+    { 'williamboman/mason-lspconfig.nvim' },     -- simple to use language server installer
+    { 'glepnir/lspsaga.nvim',                   branch = 'main' }, -- LSP UI
+    { 'jose-elias-alvarez/null-ls.nvim' },       -- for formatters and linters
+    { 'onsails/lspkind.nvim' },                  -- LSP icons
     { 'VonHeikemen/lsp-zero.nvim' },
 
     -- Cmp
-    { 'hrsh7th/nvim-cmp' }, -- completion plugin
-    { 'hrsh7th/cmp-nvim-lsp' }, -- LSP source for nvim-cmp
+    { 'hrsh7th/nvim-cmp' },         -- completion plugin
+    { 'hrsh7th/cmp-nvim-lsp' },     -- LSP source for nvim-cmp
     { 'hrsh7th/cmp-cmdline' },
     { 'saadparwaiz1/cmp_luasnip' }, -- Snippets source for nvim-cmp
-    { 'L3MON4D3/LuaSnip' }, -- Snippets plugin
+    { 'L3MON4D3/LuaSnip' },         -- Snippets plugin
     { 'nvim-lua/plenary.nvim' },
     {
       'Exafunction/codeium.nvim',
-      config = function ()
+      config = function()
         require('codeium').setup({})
       end
     },
@@ -121,7 +121,8 @@ require('lazy').setup(
 
     -- Bufferline
     {
-      'akinsho/bufferline.nvim', as = 'bufferline',
+      'akinsho/bufferline.nvim',
+      as = 'bufferline',
       dependencies = { 'nvim-tree/nvim-web-devicons' },
     },
 
@@ -151,6 +152,30 @@ require('lazy').setup(
         --   If not available, we use `mini` as the fallback
         'rcarriga/nvim-notify',
       }
+    },
+
+    -- DEBUG!
+    {
+      'rcarriga/nvim-dap-ui',
+      dependencies = {
+        'mfussenegger/nvim-dap',
+        'nvim-neotest/nvim-nio'
+      }
+    },
+
+    -- Neodev
+    { 'folke/neodev.nvim', opts = {} },
+
+    -- Notes
+    {
+      'gsuuon/note.nvim',
+      opts = {
+        spaces = {
+          '~/Dropbox/',
+        }
+      },
+      cmd = 'Note',
+      ft = 'note',
     }
   }
 )
