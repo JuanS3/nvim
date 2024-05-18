@@ -1,9 +1,3 @@
--- local ok, lspsaga = pcall(require, 'lspsaga')
--- if not ok then
--- return
--- end
---
--- lspsaga.setup()
 
 local cmp = require('cmp')
 local lspkind = require('lspkind')
@@ -19,8 +13,8 @@ cmp.setup({
   formatting = {
     format = lspkind.cmp_format({
       mode = 'symbol',
-      maxwidth = 50,
-      ellipsis_char = '...',
+      maxwidth = 60,
+      ellipsis_char = '',
       show_labelDetails = true,
       symbol_map = { codeium = '' },
     })
