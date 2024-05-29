@@ -8,6 +8,8 @@ vim.opt.expandtab = true -- convert tabs to spaces
 vim.opt.smartindent = true -- smart indentation
 vim.opt.clipboard = "unnamedplus" -- use system clipboard
 
+vim.opt.winbl = 20
+
 vim.opt.cursorline = true -- highlight current line
 vim.opt.cursorcolumn = true -- highlight current column
 
