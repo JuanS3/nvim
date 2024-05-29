@@ -1,9 +1,9 @@
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = 'dracula',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
+    theme = 'tokyonight',
+    component_separators = { left = '\u{E0B5}', right = '\u{E0B7}'},
+    section_separators = { left = '\u{E0B4}', right = '\u{E0B6}'},
     disabled_filetypes = {
       statusline = {},
       winbar = {},

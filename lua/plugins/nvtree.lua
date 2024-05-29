@@ -34,8 +34,8 @@ require('nvim-tree').setup({
         default = '',
         symlink = '',
         folder = {
-          arrow_closed = '',
-          arrow_open = '↯',
+          arrow_closed = '󰜴',
+          arrow_open = '󰜮',
           default = '',
           open = '',
           empty = '',
@@ -59,6 +59,14 @@ require('nvim-tree').setup({
     dotfiles = true,
     git_ignored = false,
     exclude = { '.gitignore' },
+    custom = {
+      '.pyc',
+      '.DS_Store',
+      '.cache',
+      '.vscode',
+      '.idea',
+      -- '__pycache__',
+    }
   },
   git = {
     enable = true,

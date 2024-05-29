@@ -12,7 +12,7 @@ require('bufferline').setup({
     separator_style = 'slant',
     show_close_icon = false,
     numbers = function(opts)
-      return string.format('%s·%s', opts.raise(opts.id), opts.lower(opts.ordinal))
+      return string.format('%s\u{E0B9}', opts.lower(opts.ordinal))
     end,
     diagnostics_indicator = function (count, level)
       local icon = level:match('error') and ' ' or ' '
