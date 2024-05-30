@@ -176,6 +176,6 @@ require('lazy').setup(
       },
       cmd = 'Note',
       ft = 'note',
-    }
+    },
   }
 )

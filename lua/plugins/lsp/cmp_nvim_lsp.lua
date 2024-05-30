@@ -1,1 +1,1 @@
-require('cmp_nvim_lsp').setup({})
+require('cmp_nvim_lsp').setup()
