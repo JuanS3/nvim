@@ -75,25 +75,20 @@ vim.keymap.set('n', '<leader>pe', vim.diagnostic.goto_prev)
 
 -- Run Python file (adapted for kitty terminal)
 vim.keymap.set('n', '<F5>', function()
-  -- Get the current buffer's filetype
-  local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
+  local filetype = vim.api.nvim_get_option_value('filetype', { buf = 0 })
 
-  -- Determine the appropriate command based on filetype
-  local command = ''
-  if filetype == 'python' then
-    command = 'python3' -- Assuming your Python environment is set up correctly
-  elseif filetype == 'go' then
-    command = 'go run' -- Replace with your actual Go command
-  elseif filetype == 'rust' then
-    command = 'cargo run' -- Replace with your actual Rust command
-  end
+  local commands = {
+    python = 'python3',
+    go = 'go run',
+    rust = 'cargo run',
+  }
 
-  -- Check if a valid command was determined
-  if command ~= '' then
+  local command = commands[filetype]
+
+  if command then
     -- Open a new kitty window and run the command
     vim.api.nvim_command(':silent !kitty --hold sh -c "' .. command .. ' ' .. vim.api.nvim_buf_get_name(0) .. '"')
   else
-    -- Handle the case where the buffer type is not recognized
     vim.api.nvim_command(":echo 'Buffer type not supported: " .. filetype .. "'")
   end
 end)
@@ -105,4 +100,3 @@ vim.keymap.set('n', '<F6>', function()
   vim.api.nvim_command(':silent !kitty --hold sh -c "python3 -m unittest "')
   -- Remember to update tests.py with your actual test file name
 end)
-
