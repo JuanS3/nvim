@@ -53,9 +53,6 @@ vim.keymap.set({ 'n', 'v' }, '<leader>F_', '?_<cr>', { silent = true }) -- move 
 vim.keymap.set({ 'n', 'v' }, '<leader>f,', '/,<cr>', { silent = true }) -- move to next comma
 vim.keymap.set({ 'n', 'v' }, '<leader>F,', '?,<cr>', { silent = true }) -- move to previous comma
 
-vim.keymap.set({ 'n', 'v' }, '<leader>f.', '/.<cr>', { silent = true }) -- move to next dot
-vim.keymap.set({ 'n', 'v' }, '<leader>F.', '?.<cr>', { silent = true }) -- move to previous dot
-
 vim.keymap.set({ 'n', 'v' }, '<leader>f(', '/(<cr>', { silent = true }) -- Move to next open parenthesis '('
 vim.keymap.set({ 'n', 'v' }, '<leader>F(', '?(<cr>', { silent = true }) -- Move to previous open parenthesis '('
 vim.keymap.set({ 'n', 'v' }, '<leader>f)', '/)<cr>', { silent = true }) -- Move to next close parenthesis ')'
