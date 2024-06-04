@@ -135,7 +135,7 @@ require('lazy').setup(
     },
 
     -- Cursor
-    { 'edluffy/specs.nvim' },
+    { 'JuanS3/specs.nvim' },
 
     -- lazy.nvim
     {
