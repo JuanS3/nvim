@@ -22,8 +22,20 @@ end
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 lspconfig.lua_ls.setup({ capabilities = capabilities, on_attach = on_attach })
--- lspconfig.ruff.setup({ on_attach = on_attach }) -- To install: pip install ruff_lsp / OpenSuse sudo zypper install python311-ruff
-lspconfig.pyright.setup({ capabilities = capabilities, on_attach = on_attach })
+
+lspconfig.ruff.setup({ capabilities = capabilities, on_attach = on_attach }) -- To install: pip install ruff_lsp / OpenSuse sudo zypper install python311-ruff
+lspconfig.pyright.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    python = {
+      analysis = {
+        ignore = { '*' },
+      },
+    },
+  },
+})
+
 lspconfig.tsserver.setup({ capabilities = capabilities, on_attach = on_attach })
 lspconfig.rust_analyzer.setup({ capabilities = capabilities, on_attach = on_attach })
 lspconfig.jsonls.setup({ capabilities = capabilities, on_attach = on_attach })
