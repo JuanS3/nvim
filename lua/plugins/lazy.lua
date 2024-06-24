@@ -97,6 +97,9 @@ require('lazy').setup(
     -- Python
     { 'Vimjas/vim-python-pep8-indent' }, -- indent for python files
 
+    -- Rust
+    { 'rust-lang/rust.vim' },
+
     -- HTML
     { 'mattn/emmet-vim' }, -- emmet for vim
 
