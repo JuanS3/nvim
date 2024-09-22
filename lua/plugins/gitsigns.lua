@@ -32,9 +32,9 @@ gitsigns.setup({
     ignore_whitespace = false,
   },
   current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
-  current_line_blame_formatter_opts = {
-    relative_time = false,
-  },
+  -- current_line_blame_formatter_opts = {
+  --   relative_time = false,
+  -- },
 
   sign_priority = 6,
   update_debounce = 100,
@@ -50,8 +50,8 @@ gitsigns.setup({
     col = 1,
   },
 
-  yadm = {
-    enable = false,
-  },
+  -- yadm = {
+  --   enable = false,
+  -- },
 
 })

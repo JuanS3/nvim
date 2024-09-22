@@ -15,7 +15,7 @@ mason_lspconfig.setup({
     "pyright",
     "ruff_lsp",
     "rust_analyzer",
-    "tsserver",
+    "ts_ls",
     "lua_ls",
     "jsonls",
     "yamlls",
