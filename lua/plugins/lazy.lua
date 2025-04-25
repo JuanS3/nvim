@@ -57,12 +57,12 @@ require('lazy').setup(
     { 'nvim-treesitter/nvim-treesitter-context' }, -- show context
 
     -- LSP
-    { 'neovim/nvim-lspconfig' },                 -- enable LSP
-    { 'williamboman/mason.nvim' },               -- simple to use language server installer
-    { 'williamboman/mason-lspconfig.nvim' },     -- simple to use language server installer
+    { 'neovim/nvim-lspconfig' },                                   -- enable LSP
+    { 'williamboman/mason.nvim' },                                 -- simple to use language server installer
+    { 'williamboman/mason-lspconfig.nvim' },                       -- simple to use language server installer
     { 'glepnir/lspsaga.nvim',                   branch = 'main' }, -- LSP UI
-    { 'jose-elias-alvarez/null-ls.nvim' },       -- for formatters and linters
-    { 'onsails/lspkind.nvim' },                  -- LSP icons
+    { 'jose-elias-alvarez/null-ls.nvim' },                         -- for formatters and linters
+    { 'onsails/lspkind.nvim' },                                    -- LSP icons
     { 'VonHeikemen/lsp-zero.nvim' },
 
     -- Cmp
@@ -174,11 +174,32 @@ require('lazy').setup(
       'gsuuon/note.nvim',
       opts = {
         spaces = {
-          '~/Dropbox/',
+          '~/Notes/',
         }
       },
       cmd = 'Note',
       ft = 'note',
+    },
+
+    -- Flash: Search and jump
+    {
+      "folke/flash.nvim",
+      event = "VeryLazy",
+      opts = {},
+      -- stylua: ignore
+      keys = {
+        { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+        { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+        { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+        { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+        { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+      },
+    },
+
+    -- Bullets
+    {
+      'bullets-vim/bullets.vim',
+      ft = 'markdown'
     },
   }
 )

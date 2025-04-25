@@ -12,21 +12,22 @@ end
 
 mason_lspconfig.setup({
   ensure_installed = {
-    "pyright",
-    "ruff_lsp",
-    "rust_analyzer",
-    "ts_ls",
-    "lua_ls",
-    "jsonls",
-    "yamlls",
-    "dockerls",
-    "clangd",
     "bashls",
-    "html",
+    "clangd",
     "cssls",
-    "marksman",
+    "dockerls",
+    "html",
+    "jsonls",
     "ltex",
+    "lua_ls",
+    "marksman",
+    "pyright",
+    "ruff",
+    "rust_analyzer",
     "sqlls",
+    "sqruff",
+    "ts_ls",
+    "yamlls",
   }
 })
 
