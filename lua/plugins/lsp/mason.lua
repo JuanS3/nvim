@@ -25,7 +25,6 @@ mason_lspconfig.setup({
     "ruff",
     "rust_analyzer",
     "sqlls",
-    "sqruff",
     "ts_ls",
     "yamlls",
   }
