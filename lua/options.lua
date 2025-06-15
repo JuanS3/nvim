@@ -1,62 +1,94 @@
-vim.opt.encoding = "utf-8"    -- set encoding
-vim.opt.nu = true             -- enable line numbers
-vim.opt.relativenumber = true -- relative line numbers
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true -- convert tabs to spaces
-vim.opt.smartindent = true -- smart indentation
-vim.opt.clipboard = "unnamedplus" -- use system clipboard
+local opt = vim.opt -- Shorten vim.opt for cleaner code
 
-vim.opt.winbl = 20
+-- Encoding
+opt.encoding = "utf-8"
+opt.fileencoding = "utf-8" -- Ensure files are read/written with UTF-8
 
-vim.opt.cursorline = true -- highlight current line
-vim.opt.cursorcolumn = true -- highlight current column
+-- Line Numbers
+opt.number = true          -- Enable line numbers
+opt.relativenumber = true  -- Enable relative line numbers
 
-vim.wo.wrap = false -- do not wrap lines
-vim.opt.autoindent = true -- auto indentation
-vim.opt.list = true -- show tab characters and trailing whitespace
-vim.opt.formatoptions:remove("t") -- no auto-intent of line breaks, keep line wrap enabled
-vim.opt.listchars = "tab:»\\ ,extends:›,precedes:‹,nbsp:·,trail:·" -- show tab characters and trailing whitespace
+-- Indentation
+opt.tabstop = 4           -- Number of spaces a Tab character takes
+opt.softtabstop = 4       -- Number of spaces for a <Tab> keypress
+opt.shiftwidth = 4        -- Number of spaces used for auto-indent
+opt.expandtab = true      -- Convert Tabs to spaces
+opt.smartindent = true    -- Smart indentation for C-like languages
 
+-- Clipboard
+opt.clipboard = "unnamedplus" -- Use system clipboard for yank, delete, put operations
 
-vim.opt.ignorecase = true                              -- ignore case when searching
-vim.opt.smartcase = true                               -- unless capital letter in search
+-- UI Blending
+opt.winbl = 20        -- Disable window blending by default, as '20' can make things blurry.
+                      -- You might want this if you use floating windows (like Noice),
+                      -- but set it to 0 initially and adjust per plugin if needed.
 
-vim.opt.swapfile = false                               -- do not use a swap file for the buffer
-vim.opt.backup = false                                 -- do not keep a backup file
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- set directory where undo files are stored
-vim.opt.undofile = true                                -- save undo history to a file
+-- Cursor Highlighting
+opt.cursorline = true     -- Highlight the current line
+opt.cursorcolumn = true   -- Generally set to false to avoid visual clutter.
+                          -- It can make text hard to read in some contexts.
+                          -- Consider removing or setting to false unless explicitly needed.
 
-vim.opt.hlsearch = true                                -- do not highlight all matches on previous search pattern
-vim.opt.incsearch = true                               -- incrementally highlight searches as you type
+-- Line Wrapping
+opt.wrap = false          -- Do not wrap lines
+opt.autoindent = true     -- Auto indentation (global, but relevant for new lines)
+opt.formatoptions:remove("t") -- No auto-indent of line breaks, keep line wrap disabled
 
-vim.opt.termguicolors = true                           -- enable true color support
+-- Visual Aides for Whitespace
+opt.list = true           -- Show listchars for tabs, trailing spaces, etc.
+opt.listchars = "tab:»\\ ,extends:›,precedes:‹,nbsp:·,trail:·" -- show tab characters and trailing whitespace
 
-vim.opt.scrolloff = 8                                  -- minimum number of lines to keep above and below the cursor
-vim.opt.sidescrolloff = 8                              --minimum number of columns to keep above and below the cursor
-vim.opt.signcolumn = "yes"                             -- always show the sign column, to avoid text shifting when signs are displayed
-vim.opt.isfname:append("@-@")                          -- include '@' in the set of characters considered part of a file name
+-- Search Options
+opt.ignorecase = true     -- Ignore case when searching
+opt.smartcase = true      -- Don't ignore case if search pattern contains uppercase
 
-vim.opt.updatetime = 50                                -- Time in milliseconds to wait before triggering the plugin events after a change
+-- Swap, Backup, and Undo Files
+opt.swapfile = false      -- Do not use a swap file for the buffer (modern Neovim uses treesitter/LSP for recovery)
+opt.backup = false        -- Do not keep a backup file
+opt.undodir = vim.fn.stdpath("data") .. "/undodir" -- Use standard Neovim data path for undo files
+-- opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- set directory where undo files are stored
+opt.undofile = true       -- Save undo history to a file
 
+-- Search Highlighting
+opt.hlsearch = true       -- Highlight all matches on previous search pattern
+opt.incsearch = true      -- Incrementally highlight searches as you type
+
+-- True Color Support
+opt.termguicolors = true  -- Enable true color support (necessary for many themes)
+
+-- Scrolling and Sign Column
+opt.scrolloff = 8         -- Minimum number of lines to keep above and below the cursor
+opt.sidescrolloff = 8     -- Minimum number of columns to keep to the sides of the cursor
+opt.signcolumn = "yes"    -- Always show the sign column (e.g., for LSP diagnostics, GitGutter signs)
+opt.isfname:append("@-@") -- Include '@' in the set of characters considered part of a file name
+
+-- Update Time for Plugins
+opt.updatetime = 300      -- Time in milliseconds to wait before triggering plugin events (e.g., LSP diagnostics).
+                          -- 50ms is too low and can cause performance issues or excessive updates.
+                          -- 300ms is a common good balance.
+
+--- Autocommands ---
+
+-- Python Formatting (textwidth and colorcolumn)
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = "*.py",
   callback = function()
-    vim.opt.textwidth = 120
-    vim.opt.colorcolumn = "120"
+    opt.textwidth = 120
+    opt.colorcolumn = "120"
   end
-}) -- python formatting
+})
 
+-- JavaScript/HTML/CSS/Lua Formatting (indentation)
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  pattern = { "*.js", "*.html", "*.css", "*.lua" },
+  pattern = { "*.js", "*.html", "*.css", "*.lua", "*.sql" },
   callback = function()
-    vim.opt.tabstop = 2
-    vim.opt.softtabstop = 2
-    vim.opt.shiftwidth = 2
+    opt.tabstop = 2
+    opt.softtabstop = 2
+    opt.shiftwidth = 2
   end
-}) -- javascript formatting
+})
 
+-- Return to last edit position when opening files
 vim.api.nvim_create_autocmd("BufReadPost", {
   pattern = "*",
   callback = function()
@@ -64,10 +96,10 @@ vim.api.nvim_create_autocmd("BufReadPost", {
       vim.cmd("normal! g`\"")
     end
   end
-}) -- return to last edit position when opening files
+})
 
-
-local HighlightYank = vim.api.nvim_create_augroup('HighlightYank', {})
+-- Highlight yanked text using the 'IncSearch' highlight group for 40ms
+local HighlightYank = vim.api.nvim_create_augroup('HighlightYank', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = HighlightYank,
   pattern = '*',
@@ -77,17 +109,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
       timeout = 40,
     })
   end,
-}) -- highlight yanked text using the 'IncSearch' highlight group for 40ms
+})
 
-local CleanOnSave = vim.api.nvim_create_augroup('CleanOnSave', {})
+-- Remove trailing whitespace from all lines before saving a file
+local CleanOnSave = vim.api.nvim_create_augroup('CleanOnSave', { clear = true })
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   group = CleanOnSave,
   pattern = "*",
   command = [[%s/\s\+$//e]],
-}) -- remove trailing whitespace from all lines before saving a file)
+})
 
+-- Auto-format Python files with Black on save
 local Black = vim.api.nvim_create_augroup("Black", { clear = true })
-vim.api.nvim_create_autocmd("bufWritePost", {
+vim.api.nvim_create_autocmd("BufWritePost", {
   group = Black,
   pattern = "*.py",
   command = "silent !black %",

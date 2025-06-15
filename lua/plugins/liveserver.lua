@@ -1,7 +1,7 @@
 require('live-server').setup({
   args = {
     '--port=5000',
-    '--browser=vivaldi',
+    '--browser=opera',
   }
 })
 

@@ -2,9 +2,9 @@ require('codesnap').setup({
   save_path = '~/Pictures',
   has_breadcrumb = false,
   bg_color = '#2e3440',
-  watermark = 'OneCode',
+  watermark = 'Datolytix',
   has_line_number = true,
-  title = 'OneCode',
+  title = 'Datolytix',
   mac_window_bar = true,
 })
 
