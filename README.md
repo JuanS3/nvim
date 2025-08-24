@@ -1,99 +1,132 @@
-# Neovim Configuration (Beta β)
+<div align="center">
 
-Welcome to my Neovim configuration repository! This repository contains my personalized configuration files and plugins for Neovim, meticulously crafted to optimize my coding workflow and productivity.
-This configuration is designed to enhance my editing experience, offering a seamless experience for both code and text editing.
+# Sebastian's Neovim Config
 
-## Table of Contents
+<a href="https" title="Sebastian's Neovim Config"><img src="https://user-images.githubusercontent.com/49962207/209454943-50d2235a-519d-4b9c-9c6c-a09a6b529391.png" alt="Neovim" width="150" style="border-radius: 50%; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"></a>
 
-- [Overview](#overview)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Plugins](#plugins)
-- [Customization](#customization)
-- [Key Mappings](#key-mappings)
-- [Contributing](#contributing)
-- [Acknowledgements](#acknowledgements)
+**A custom, modern, and blazing-fast Neovim configuration, built in Lua and managed with [Lazy.nvim](https://github.com/folke/lazy.nvim).**
+
+</div>
 
 ---
 
-## Overview <a name="overview"></a>
+<div align="center">
 
-Neovim is a highly extensible text editor based on Vim, designed to provide a modern and efficient editing experience. My Neovim configuration builds upon its powerful features, offering a customized environment optimized for coding and text editing tasks.
+*Crafted to provide a seamless, intuitive, and visually pleasing development experience.*
 
-## Features <a name="features"></a>
+</div>
 
-- **Enhanced Editing**: Streamlined editing workflows with custom key mappings, macros, and text objects.
-- **Syntax Highlighting**: Rich syntax highlighting for various programming languages and file types, improving code readability and comprehension.
-- **Plugin Management**: Seamless integration of plugins for additional functionality and productivity enhancements, managed via Lazy, a Lua-based lazy-loading plugin manager.
-- **Custom Themes**: Thoughtfully selected color schemes and UI enhancements to create a visually appealing and comfortable editing environment, reducing eye strain during extended coding sessions.
-- **Language Support**: Specialized configurations and plugins for popular programming languages and frameworks, including code completion, linting, and formatting tools.
+![divider](https://user-images.githubusercontent.com/49962207/209629019-950d0a88-c52f-4a1c-8613-817f23c57590.png)
 
-## Installation <a name="installation"></a>
+## ✨ Key Features
 
-To use my Neovim configuration, follow these steps:
+- **🚀 Superior Performance:** Optimized for a nearly instant startup and a fluid response.
+- **🎨 Modern Interface:** A clean and functional UI with `lualine`, `bufferline`, and `noice`.
+- **🧠 Smart LSP:** Top-tier autocompletion, diagnostics, and code navigation with `mason` and `nvim-lspconfig`.
+- ** seamlessly Git:** Perfect Git integration directly in the editor thanks to `gitsigns`.
+- **🔍 Fuzzy Search:** Find files, buffers, and more in seconds with the power of `telescope.nvim`.
+- **🌳 Treesitter:** Advanced and accurate syntax highlighting for better code comprehension.
 
-1. **Clone the Repository**: Clone this repository to your local machine.
+---
 
+## 📸 In Action!
+
+*(Here you can add a screenshot of your setup. Go ahead and show it off!)*
+
+![image](https://github.com/user-attachments/assets/10352185-1252-421a-a11a-30552dc1a86c)
+
+
+---
+
+## 📋 Prerequisites
+
+- **[Neovim](https://github.com/neovim/neovim/releases/)** (v0.9.0+ recommended).
+- **`git`** for cloning and managing plugins.
+- A **[Nerd Font](https://www.nerdfonts.com/)** for icons to display correctly (e.g., Fira Code, JetBrains Mono).
+- **C Compiler and Node.js** (required for `telescope` and other plugins).
+
+---
+
+## 💾 Installation
+
+1.  **Make a backup (Important!):**
+    If you have an existing configuration, save it first.
+    ```bash
+    mv ~/.config/nvim ~/.config/nvim.bak
+    ```
+
+2.  **Clone the repository:**
     ```bash
     git clone https://github.com/JuanS3/nvim.git ~/.config/nvim
     ```
 
-2. **Enjoy**: Start using Neovim with my customized configuration!
+3.  **Start Neovim:**
+    Open Neovim. [Lazy.nvim](https://github.com/folke/lazy.nvim) will handle installing all the plugins automatically on the first launch.
+    ```bash
+    nvim
+    ```
 
-## Usage <a name="usage"></a>
+---
 
-To make the most of my Neovim configuration, explore its features and customization options. Familiarize yourself with key mappings, plugin commands, and additional functionality provided by installed plugins. Refer to the extensive comments and documentation within the Lua configuration files (`init.lua` and Lua modules) for detailed information.
+## 🔌 Featured Plugins
 
-## Plugins <a name="plugins"></a>
+This plugin ecosystem is organized to enhance every aspect of development.
 
-My Neovim configuration includes a curated selection of plugins to extend its capabilities. Lazy loading is employed to ensure fast startup times and efficient resource usage. Some of the key plugins featured in this configuration are:
+<details>
+<summary><strong>🎨 UI & Visual Experience</strong></summary>
 
-- **[lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)**: A fast and customizable statusline written in Lua, providing essential information about the editing session.
-- **[codeium.nvim](https://github.com/Exafunction/codeium.vim)**: A code completion plugin for Neovim.
-- **[MarkdownPreview](https://github.com/iamcco/markdown-preview.nvim)**: A live preview plugin for Markdown files in Neovim.
-- **[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)**: A highly extensible fuzzy finder plugin implemented in Lua for efficient file and buffer navigation.
-- **[nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua)**: A file explorer plugin implemented in Lua for easy project navigation.
-- **[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)**: A powerful and extensible syntax highlighting plugin for Neovim.
-- **[nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)**: A plugin for configuring and managing language servers in Neovim.
-- **[mason.nvim](https://github.com/williamboman/mason.nvim)**: A plugin for managing and installing language servers and other tools in Neovim.
-- **[mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim)**: A plugin for configuring and managing language servers in Neovim.
-- **[lspsaga.nvim](https://github.com/glepnir/lspsaga.nvim)**: A plugin for displaying LSP diagnostics and code actions in Neovim.
-- **[null-ls.nvim](https://github.com/jose-elias-alvarez/null-ls.nvim)**: A plugin for managing and installing language servers in Neovim.
-- **[lspkind.nvim](https://github.com/onsails/lspkind-nvim)**: A plugin for displaying LSP icons in Neovim.
-- **[nvim-cmp](https://github.com/hrsh7th/nvim-cmp)**: A plugin for displaying LSP diagnostics and code actions in Neovim.
-- **[cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp)**: A plugin for displaying LSP diagnostics and code actions in Neovim.
-- **[cmp_luasnip](https://github.com/saadparwaiz1/cmp_luasnip)**: A plugin for displaying LSP diagnostics and code actions in Neovim.
-- **[LuaSnip](https://github.com/L3MON4D3/LuaSnip)**: A plugin for displaying LSP diagnostics and code actions in Neovim.
-- **[lsp-zero.nvim](https://github.com/VonHeikemen/lsp-zero.nvim)**: A plugin for displaying LSP diagnostics and code actions in Neovim.
-- **[nvim-autopairs](https://github.com/windwp/nvim-autopairs)**: A super powerful autopair plugin for Neovim that supports multiple characters.
-- **[nvim-comment](https://github.com/terrortylor/nvim-comment)**: Toggle comments in Neovim, using built in `commentstring` filetype option; written in Lua.
-- **[gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)**: Super fast git decorations implemented purely in Lua.
-- **[wich-key.nvim](https://github.com/folke/which-key.nvim)**: WhichKey is a lua plugin that displays a popup with possible key bindings of the command you started typing.
-- **[auto-save.nvim](https://github.com/Pocco81/auto-save.nvim)**: A plugin for automatically saving files in Neovim.
-- **[vim-python-pep8-indent](https://github.com/Vimjas/vim-python-pep8-indent)**: Neovim plugin for PEP8 indentation.
-- **[emmet-vim](https://github.com/mattn/emmet-vim)**: A plugin for super fast HTML and CSS coding in Neovim.
-- **[vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator)**: A plugin for navigating between Vim and Tmux panes in Neovim.
-- **[codesnap.nvim](https://github.com/mistricky/codesnap.nvim)**: This plugin provides snapshots of code in Neovim.
-- **[indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)**: A plugin for displaying indentation guides in Neovim.
-- **[nvim-highlight-colors](https://github.com/brenoprata10/nvim-highlight-colors)**: A plugin for highlighting colors in Neovim.
+- **[lualine.nvim](https://github.com/nvim-lualine/lualine.nvim):** A fast and customizable statusline.
+- **[bufferline.nvim](https://github.com/akinsho/bufferline.nvim):** Elegant and functional buffer tabs.
+- **[noice.nvim](https://github.com/folke/noice.nvim):** A modern interface for notifications and the command line.
+- **[which-key.nvim](https://github.com/folke/which-key.nvim):** Displays available key bindings.
+- **[nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua):** A tree-style file explorer.
+- **[indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim):** Visual indentation guides.
 
+</details>
 
-Explore the `init.lua` file and corresponding Lua modules for a comprehensive list of installed plugins and their settings.
+<details>
+<summary><strong>🧠 LSP & Development</strong></summary>
 
-## Customization <a name="customization"></a>
+- **[nvim-lspconfig](https://github.com/neovim/nvim-lspconfig):** Configurations for Neovim's native LSP.
+- **[mason.nvim](https://github.com/williamboman/mason.nvim):** Easily manage and install LSPs, linters, and formatters.
+- **[nvim-cmp](https://github.com/hrsh7th/nvim-cmp):** The most complete autocompletion engine.
+- **[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter):** Advanced syntax highlighting and much more.
+- **[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim):** The ultimate fuzzy finder for Neovim.
+- **[gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim):** Git decorations and actions in the buffer.
+- **[Comment.nvim](https://github.com/numToStr/Comment.nvim):** Smart, context-aware comments.
 
-Feel free to customize my Neovim configuration according to your preferences and workflow. Modify key mappings, tweak plugin settings, or add/remove plugins to tailor the environment to your specific needs. Lua-based configuration allows for flexible and powerful customization, enabling you to create a personalized editing experience.
+</details>
 
-## Key Mappings <a name="key-mappings"></a>
+<details>
+<summary><strong>🛠️ Utilities & Quality of Life</strong></summary>
 
-The `init.lua` file contains detailed key mappings and configurations to enhance your editing experience. Familiarize yourself with these mappings to efficiently navigate, edit, and manipulate text within Neovim. Additionally, explore Lua modules for plugin-specific mappings and configurations.
+- **[lazy.nvim](https://github.com/folke/lazy.nvim):** The lazy plugin manager that makes it all possible.
+- **[nvim-autopairs](https://github.com/windwp/nvim-autopairs):** Automatic closing of parentheses, quotes, etc.
+- **[codesnap.nvim](https://github.com/mistricky/codesnap.nvim):** Create beautiful snapshots of your code.
+- **[markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim):** Preview Markdown files in your browser.
 
-## Contributing <a name="contributing"></a>
+</details>
 
-Contributions, suggestions, and feedback are welcome! If you have ideas for improving my Neovim configuration or encounter any issues, please open an issue or submit a pull request. Let's collaborate to make Neovim even better for everyone.
+> *To see the full list and their configurations, explore the files in `lua/plugins/`.*
 
-## Acknowledgements <a name="acknowledgements"></a>
+---
 
-I would like to express my gratitude to the developers of Neovim and the creators of the plugins used in this configuration. Their dedication and contributions have significantly enriched the Neovim ecosystem and transformed the way we edit text and code.
+## ⌨️ Key Mappings
 
+The main leader key is set to `Space`.
+
+- **`<Space>`:** Press the spacebar in Normal mode to activate `which-key` and see all available shortcuts.
+- **`<Space>ff`:** Find files with Telescope.
+- **`<Space>fg`:** Search file contents (Live Grep).
+
+For a complete list of keymaps, check the `lua/keymaps.lua` file.
+
+---
+
+## 🤝 Contributions
+
+Suggestions and contributions are always welcome! If you have ideas for improving this configuration, open an *issue* or submit a *pull request*.
+
+## 🙏 Acknowledgements
+
+A special thanks to the Neovim community and all the developers of the plugins that make this incredible editing experience possible.
