@@ -1,62 +1,3 @@
--- local ok, gitsigns = pcall(require, "gitsigns")
--- if not ok then
---   return
--- end
---
--- gitsigns.setup({
---
---   signs = {
---     add = { text = "󰌴" },
---     change = { text = "󰑌" },
---     delete = { text = "󰗨" },
---     topdelete = { text = "󰗨" },
---     changedelete = { text = "~" },
---     untracked = { text = "󱁖" },
---   },
---
---   signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
---   numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
---   linehl = true, -- Toggle with `:Gitsigns toggle_linehl`
---   word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
---   watch_gitdir = {
---     interval = 1000,
---     follow_files = true,
---   },
---
---   attach_to_untracked = true,
---   current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
---   current_line_blame_opts = {
---     virt_text = true,
---     virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
---     delay = 1000,
---     ignore_whitespace = false,
---   },
---   current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
---   -- current_line_blame_formatter_opts = {
---   --   relative_time = false,
---   -- },
---
---   sign_priority = 6,
---   update_debounce = 100,
---   status_formatter = nil, -- Use default
---   max_file_length = 40000,
---
---   preview_config = {
---     -- Options passed to nvim_open_win
---     border = "single",
---     style = "minimal",
---     relative = "cursor",
---     row = 0,
---     col = 1,
---   },
---
---   -- yadm = {
---   --   enable = false,
---   -- },
---
--- })
-
-
 local ok, gitsigns = pcall(require, "gitsigns")
 if not ok then
   return -- Safely exit if gitsigns is not available
@@ -65,12 +6,12 @@ end
 gitsigns.setup({
   -- Custom signs for Git changes. These require a Nerd Font to display correctly.
   signs = {
-    add = { text = "󰌴" },        -- Added lines
-    change = { text = "󰑌" },     -- Changed lines
-    delete = { text = "󰗨" },     -- Deleted lines (start of deletion)
-    topdelete = { text = "󰗨" },  -- Deleted lines (top of a deletion block)
+    add = { text = "󰌴" }, -- Added lines
+    change = { text = "󰑌" }, -- Changed lines
+    delete = { text = "󰗨" }, -- Deleted lines (start of deletion)
+    topdelete = { text = "󰗨" }, -- Deleted lines (top of a deletion block)
     changedelete = { text = "~" }, -- Changed and deleted lines (replaced with ~)
-    untracked = { text = "󱁖" },  -- Untracked files/lines
+    untracked = { text = "⟴" }, -- Untracked files/lines
   },
 
   -- Enable/disable features that display in the sign column or line.
@@ -81,18 +22,18 @@ gitsigns.setup({
 
   -- Watch the Git directory for changes.
   watch_gitdir = {
-    interval = 1000,    -- Check for Git changes every 1000ms (1 second)
+    interval = 1000,     -- Check for Git changes every 1000ms (1 second)
     follow_files = true, -- Update signs when files are moved/renamed
   },
 
   attach_to_untracked = true, -- Show untracked signs on new files.
 
   -- Current line blame settings (displays git blame info on the current line)
-  current_line_blame = true, -- Enable current line blame
+  current_line_blame = true,   -- Enable current line blame
   current_line_blame_opts = {
-    virt_text = true,   -- Display blame information as virtual text
-    virt_text_pos = "eol", -- Position of the virtual text: 'eol' (end of line) | 'overlay' | 'right_align'
-    delay = 100,        -- Delay before showing blame (changed from 1000 to 100 for faster feedback)
+    virt_text = true,          -- Display blame information as virtual text
+    virt_text_pos = "eol",     -- Position of the virtual text: 'eol' (end of line) | 'overlay' | 'right_align'
+    delay = 100,               -- Delay before showing blame (changed from 1000 to 100 for faster feedback)
     ignore_whitespace = false, -- Include whitespace changes in blame (usually false is good)
   },
   -- Formatter for the current line blame virtual text.
@@ -104,18 +45,18 @@ gitsigns.setup({
   --   relative_time = false,
   -- },
 
-  sign_priority = 6,     -- Priority for Git signs when multiple signs are on the same line.
-  update_debounce = 50,  -- Delay before updating signs after changes (changed from 100 to 50 for faster feedback)
-  status_formatter = nil, -- Use default status line formatter (good if Lualine/others handle Git status)
+  sign_priority = 6,       -- Priority for Git signs when multiple signs are on the same line.
+  update_debounce = 50,    -- Delay before updating signs after changes (changed from 100 to 50 for faster feedback)
+  status_formatter = nil,  -- Use default status line formatter (good if Lualine/others handle Git status)
   max_file_length = 40000, -- Maximum file length for Gitsigns to be active (prevents slowdowns on huge files)
 
   -- Configuration for preview popups (e.g., when hovering over a sign).
   preview_config = {
-    border = "single", -- Border style for the preview window
-    style = "minimal", -- Window style (minimal, auto, etc.)
+    border = "single",   -- Border style for the preview window
+    style = "minimal",   -- Window style (minimal, auto, etc.)
     relative = "cursor", -- Position relative to the cursor
-    row = 0,           -- Offset row from relative position
-    col = 1,           -- Offset column from relative position
+    row = 0,             -- Offset row from relative position
+    col = 1,             -- Offset column from relative position
   },
 
   -- yadm = { -- Only enable if you use yadm for dotfile management
