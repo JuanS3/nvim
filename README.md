@@ -2,21 +2,13 @@
 
 # Sebastian's Neovim Config
 
-<a href="https" title="Sebastian's Neovim Config"><img src="https://user-images.githubusercontent.com/49962207/209454943-50d2235a-519d-4b9c-9c6c-a09a6b529391.png" alt="Neovim" width="150" style="border-radius: 50%; box-shadow: 0 4px 8px rgba(0,0,0,0.2);"></a>
-
 **A custom, modern, and blazing-fast Neovim configuration, built in Lua and managed with [Lazy.nvim](https://github.com/folke/lazy.nvim).**
-
-</div>
-
----
-
-<div align="center">
 
 *Crafted to provide a seamless, intuitive, and visually pleasing development experience.*
 
 </div>
 
-![divider](https://user-images.githubusercontent.com/49962207/209629019-950d0a88-c52f-4a1c-8613-817f23c57590.png)
+---
 
 ## ✨ Key Features
 
@@ -31,10 +23,7 @@
 
 ## 📸 In Action!
 
-*(Here you can add a screenshot of your setup. Go ahead and show it off!)*
-
-![image](https://github.com/user-attachments/assets/10352185-1252-421a-a11a-30552dc1a86c)
-
+*(This is the perfect spot to add a screenshot of your setup!)*
 
 ---
 
