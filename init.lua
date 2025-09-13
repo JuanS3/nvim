@@ -21,9 +21,9 @@ require('plugins.lazy')
 --- Theme and UI Plugins ---
 -- Load your color scheme and theme.
 require('plugins.colors') -- If 'colors.lua' is solely for loading the color scheme
-require('plugins.theme')   -- If 'theme.lua' sets up the main theme
+require('plugins.theme')  -- If 'theme.lua' sets up the main theme
 require('plugins.indent')
-require('plugins.noice')   -- Noice changes the UI, can be loaded before or after lualine/bufferline
+require('plugins.noice')  -- Noice changes the UI, can be loaded before or after lualine/bufferline
 require('plugins.bufferline')
 require('plugins.lualine')
 
@@ -44,11 +44,11 @@ require('plugins.specs')
 
 
 --- LSP and Autocompletion Plugins (CRITICAL ORDER) ---
-require('plugins.lsp.mason')       -- LSP server installer and manager
-require('plugins.lsp.neodev')      -- Better support for Neovim Lua development, before lspconfig
+require('plugins.lsp.mason')        -- LSP server installer and manager
+require('plugins.lsp.neodev')       -- Better support for Neovim Lua development, before lspconfig
 -- require('plugins.lsp.lsp_zero')    -- Simplifies LSP configuration, usually loaded before lspconfig
-require('plugins.lsp.lspconfig')   -- Core LSP client configuration
+require('plugins.lsp.lspconfig')    -- Core LSP client configuration
 require('plugins.lsp.cmp_nvim_lsp') -- Integration of cmp with lsp
-require('plugins.lsp.cmp')         -- Autocompletion (requires cmp_nvim_lsp and lspconfig)
-require('plugins.lsp.null-ls')     -- For linters, formatters, etc.
-require('plugins.lsp.lspsaga')     -- UI enhancements for LSP
+require('plugins.lsp.cmp')          -- Autocompletion (requires cmp_nvim_lsp and lspconfig)
+require('plugins.lsp.null-ls')      -- For linters, formatters, etc.
+require('plugins.lsp.lspsaga')      -- UI enhancements for LSP
