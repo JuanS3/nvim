@@ -1,5 +1,6 @@
 return {
   'goolord/alpha-nvim',
+  event = 'VimEnter',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
     local alpha = require('alpha')
@@ -38,7 +39,7 @@ return {
 
     dashboard.section.footer.val = footer()
 
-    dashboard.config.opts.opts.noautocmd = true
-    alpha.setup(dashboard.opts)
+    dashboard.config.opts.noautocmd = true
+    alpha.setup(dashboard.config)
   end,
 }

@@ -18,6 +18,9 @@ require('lazy').setup(
     { 'folke/neodev.nvim',          opts = {} }, -- Essential for Neovim development, providing LSP for Lua config
 
     -- --- UI & Aesthetics ---
+    -- Dashboard
+    { import = 'plugins.dashboard' },
+
     -- Theme
     { 'folke/tokyonight.nvim' },
     { 'nvim-tree/nvim-web-devicons' }, -- Required for most icon plugins (NvimTree, Bufferline, Lualine, LSPKind)

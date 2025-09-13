@@ -30,7 +30,7 @@ opt.cursorcolumn = true -- Generally set to false to avoid visual clutter.
 -- Consider removing or setting to false unless explicitly needed.
 
 -- Performance Settings
-opt.lazyredraw = true  -- Don't redraw screen during macro playback
+-- opt.lazyredraw = true  -- Don't redraw screen during macro playback
 opt.re = 2             -- Use regex engine v2 (faster and more powerful)
 vim.g.loaded_netrw = 1 -- Disable netrw
 vim.g.loaded_netrwPlugin = 1
