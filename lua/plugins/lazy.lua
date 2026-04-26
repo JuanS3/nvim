@@ -97,9 +97,11 @@ require('lazy').setup(
       'windwp/nvim-ts-autotag',
       event = { 'BufReadPost', 'BufNewFile' },
       opts = {
-        enable_close = true,
-        enable_rename = true,
-        enable_close_on_slash = false,
+        opts = {
+          enable_close = true,
+          enable_rename = true,
+          enable_close_on_slash = false,
+        },
       },
     }, -- Auto close/rename HTML/XML tags (uses Tree-sitter)
 
@@ -196,7 +198,33 @@ require('lazy').setup(
       'iamcco/markdown-preview.nvim',
       cmd = { 'MarkdownPreviewToggle' },
       ft = { 'markdown' },
-      build = function() vim.fn['mkdp#util#install']() end,
+      init = function()
+        -- FIX: Neovim no carga el entorno de nvm. Detectamos Node.js manualmente
+        -- antes de que el plugin se instale/compile para usar la versión correcta.
+        local nvm_nodes = vim.fn.glob('~/.nvm/versions/node/*/bin/node', false, true)
+        if #nvm_nodes > 0 then
+          table.sort(nvm_nodes)
+          vim.g.mkdp_node_path = nvm_nodes[#nvm_nodes]
+        else
+          local node_in_path = vim.fn.exepath('node')
+          if node_in_path ~= '' then
+            vim.g.mkdp_node_path = node_in_path
+          end
+        end
+      end,
+      build = function()
+        -- FIX: El script mkdp#util#install() descarga un bundle pre-compilado que
+        -- a veces falla o queda incompleto (falta tslib). Instalamos las deps
+        -- directamente con npm del Node.js detectado en el directorio app/.
+        local app_dir = vim.fn.stdpath('data') .. '/lazy/markdown-preview.nvim/app'
+        local node = vim.g.mkdp_node_path or 'node'
+        local npm = vim.fn.fnamemodify(node, ':h') .. '/npm'
+        vim.fn.system({
+          'sh', '-c',
+          'cd ' .. vim.fn.shellescape(app_dir) .. ' && '
+            .. vim.fn.shellescape(npm) .. ' install --production'
+        })
+      end,
     },
 
     -- Notes

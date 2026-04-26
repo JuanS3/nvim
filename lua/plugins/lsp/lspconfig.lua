@@ -14,10 +14,18 @@ local function setup_server(name, opts)
   local ok, server = pcall(require, 'lspconfig.configs.' .. name)
   local default_config = ok and server.default_config or {}
 
+  -- FIX: Las funciones root_dir de lspconfig son incompatibles con vim.lsp.config()
+  -- en nvim 0.11+. Crashean porque vim.fs.find recibe un number en vez de string.
+  -- Se elimina el root_dir defectuoso y se provee uno propio robusto.
+  default_config.root_dir = nil
+
   -- Merge: defaults de lspconfig -> capabilities/on_attach base -> opts custom
   local config = vim.tbl_deep_extend('force', default_config, {
     capabilities = lsp_defaults.capabilities,
     on_attach = lsp_defaults.on_attach,
+    root_dir = function(bufnr)
+      return vim.fs.root(bufnr, { '.git' }) or vim.fn.expand('%:p:h')
+    end,
   }, opts)
 
   vim.lsp.config(name, config)
@@ -60,7 +68,11 @@ setup_server('bashls')
 setup_server('html')
 setup_server('cssls')
 setup_server('marksman')
-setup_server('ltex')
+setup_server('ltex', {
+  root_dir = function(bufnr)
+    return vim.fs.root(bufnr, { '.git', '.ltex' }) or vim.fn.expand('%:p:h')
+  end,
+})
 setup_server('sqlls')
 setup_server('tailwindcss')
 -- FIX: sqlfluff removido porque no es un LSP server en nvim-lspconfig.
