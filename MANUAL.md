@@ -40,6 +40,11 @@ This is a **modern, performance-optimized Neovim configuration** built entirely 
 - 🐛 **DAP** debugging support
 - 🌐 **Live Server** for web development
 - 📓 **Note-taking** system
+- ⚡ **conform.nvim** — modern async formatting (black, prettier, stylua, rustfmt)
+- 🔥 **trouble.nvim** — elegant diagnostics and quickfix list
+- 🎯 **harpoon** — lightning-fast file bookmarks
+- ✅ **todo-comments** — highlight and search TODO/FIXME/HACK
+- 🗂️ **oil.nvim** — edit your filesystem like a buffer
 
 ---
 
@@ -246,6 +251,25 @@ Before using this configuration, ensure you have:
 | `<F9>` | n | Toggle breakpoint |
 | `<F10>` | n | Continue / start debugging |
 
+### 🚀 Productivity & Navigation
+
+| Key | Mode | Action |
+|-----|------|--------|
+| `<leader>cf` | n, v | Format with conform.nvim |
+| `<leader>xx` | n | Trouble: workspace diagnostics |
+| `<leader>xX` | n | Trouble: document diagnostics |
+| `<leader>xq` | n | Trouble: quickfix list |
+| `<leader>xl` | n | Trouble: location list |
+| `<leader>cs` | n | Trouble: document symbols |
+| `<leader>cl` | n | Trouble: LSP references |
+| `<leader>ha` | n | Harpoon: add current file |
+| `<leader>hh` | n | Harpoon: toggle quick menu |
+| `<leader>h1` .. `<leader>h5` | n | Harpoon: jump to file 1-5 |
+| `<leader>td` | n | Search TODOs with Telescope |
+| `<leader>tq` | n | Open TODOs in Trouble |
+| `<leader>e` | n | Open oil.nvim (current dir) |
+| `-` | n | Open oil.nvim (parent dir) |
+
 ### ⚡ Run Code
 
 | Key | Mode | Action |
@@ -416,6 +440,78 @@ Advanced syntax highlighting and code manipulation:
 - Context-aware commenting
 - Rainbow indentation guides
 - Auto-tag closing for HTML/XML
+
+---
+
+### 🔧 Formatting (conform.nvim)
+
+Modern async formatting with fallback to LSP:
+- **Lua**: `stylua`
+- **Python**: `isort` → `black`
+- **JS/TS/JSON/YAML/HTML/CSS/Markdown**: `prettier`
+- **Rust**: `rustfmt`
+- **Shell**: `shfmt`
+- **Go**: `gofmt` + `goimports`
+
+Formats on save automatically. If no formatter is configured for the filetype, it falls back to LSP formatting.
+
+---
+
+### 🔥 Trouble
+
+A beautiful diagnostics and quickfix list:
+- `<leader>xx` — All workspace diagnostics
+- `<leader>xX` — Current buffer diagnostics only
+- `<leader>xq` — Quickfix list
+- `<leader>xl` — Location list
+- `<leader>cs` — Document symbols
+- `<leader>cl` — LSP references
+
+Navigate with `j/k`, press `<CR>` to jump, `q` to close.
+
+---
+
+### 🎯 Harpoon
+
+Mark files and jump between them instantly:
+- `<leader>ha` — Add current file to the list
+- `<leader>hh` — Open the harpoon menu
+- `<leader>h1` .. `<leader>h5` — Jump directly to file 1-5
+
+Perfect when you're working across 3-5 files and don't want to cycle through all buffers.
+
+---
+
+### ✅ Todo Comments
+
+Automatically highlights these keywords in comments:
+- `TODO:` — Blue
+- `FIX:` / `FIXME:` / `BUG:` — Red
+- `HACK:` — Yellow
+- `WARN:` / `WARNING:` / `XXX:` — Yellow
+- `PERF:` / `OPTIMIZE:` — Purple
+- `NOTE:` / `INFO:` — Green
+- `TEST:` — Magenta
+
+Search them with `<leader>td` (Telescope) or `<leader>tq` (Trouble).
+
+---
+
+### 🗂️ Oil
+
+Edit your filesystem as if it were a normal buffer:
+- `<leader>e` — Open oil in the current directory
+- `-` — Open oil in the parent directory
+
+Inside oil:
+- `dd` — Delete file/directory
+- `cw` — Rename
+- `yy` — Copy
+- `p` — Paste
+- `<CR>` — Open file / Enter directory
+- `q` — Close oil
+
+Shows hidden files by default.
 
 ---
 

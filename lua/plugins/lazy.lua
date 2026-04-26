@@ -314,6 +314,48 @@ require('lazy').setup(
       }
     },
 
+    -- --- Recommended Plugins (Productivity) ---
+
+    -- Modern formatting (replaces null-ls/none-ls for formatting)
+    {
+      'stevearc/conform.nvim',
+      event = { 'BufReadPre', 'BufNewFile' },
+      cmd = 'ConformInfo',
+      config = function() require('plugins.conform') end,
+    },
+
+    -- Elegant diagnostics/quickfix list
+    {
+      'folke/trouble.nvim',
+      cmd = 'Trouble',
+      dependencies = { 'nvim-tree/nvim-web-devicons' },
+      config = function() require('plugins.trouble') end,
+    },
+
+    -- Quick file bookmarks (harpoon2)
+    {
+      'ThePrimeagen/harpoon',
+      branch = 'harpoon2',
+      dependencies = { 'nvim-lua/plenary.nvim' },
+      config = function() require('plugins.harpoon') end,
+    },
+
+    -- Highlight and search TODO/FIXME/HACK comments
+    {
+      'folke/todo-comments.nvim',
+      dependencies = { 'nvim-lua/plenary.nvim' },
+      event = { 'BufReadPost', 'BufNewFile' },
+      config = function() require('plugins.todo-comments') end,
+    },
+
+    -- Edit filesystem like a buffer
+    {
+      'stevearc/oil.nvim',
+      cmd = 'Oil',
+      keys = { '<leader>e', '-' },
+      config = function() require('plugins.oil') end,
+    },
+
     -- Tmux Integration
     { 'christoomey/vim-tmux-navigator' }, -- Seamless navigation between Neovim panes and Tmux windows
   },
