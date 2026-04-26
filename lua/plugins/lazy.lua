@@ -281,14 +281,13 @@ require('lazy').setup(
     {
       'mfussenegger/nvim-dap',
       event = 'VeryLazy',
-      keys = {
-        { '<F9>', function() require('dap').toggle_breakpoint() end, desc = 'DAP Toggle Breakpoint' },
-        { '<F10>', function() require('dap').continue() end, desc = 'DAP Continue' },
-      },
       dependencies = {
         'rcarriga/nvim-dap-ui',
         'nvim-neotest/nvim-nio',
-      }
+        'mfussenegger/nvim-dap-python',
+        'theHamsta/nvim-dap-virtual-text',
+      },
+      config = function() require('plugins.dap') end,
     },
 
     -- --- Recommended Plugins (Productivity) ---

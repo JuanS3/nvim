@@ -744,7 +744,7 @@ Ensure `black`, `isort`, and `ruff` are installed via `:MasonInstallTools`.
 
 1. **Press `<Space>`** in Normal mode to trigger `which-key` and discover available shortcuts.
 2. **Use `s`** for lightning-fast navigation with Flash — type `s` followed by the character you want to jump to.
-3. **`<F5>`** runs your current file instantly for Python, Go, and Rust.
+3. **`<F8>`** runs your current file instantly for Python, Go, and Rust.
 4. **Treesitter text objects** like `vif` (visual inside function) make selecting code blocks effortless.
 5. **`<leader>ca`** in visual mode triggers CodeSnap for sharing beautiful code screenshots.
 6. **Live Server** (`<leader>lc`) auto-refreshes your browser on HTML/CSS/JS changes.

@@ -101,7 +101,8 @@ map('n', '<leader>ws', vim.lsp.buf.workspace_symbol, opts)
 -- --- Custom Functions (Run File / Unit Tests) ---
 
 -- Run Python/Go/Rust file (adapted for kitty terminal)
-map('n', '<F5>', function()
+-- NOTE: <F5> is now reserved for DAP debugging (continue/start)
+map('n', '<F8>', function()
   local filetype = vim.api.nvim_get_option_value('filetype', { buf = 0 })
 
   local commands = {
