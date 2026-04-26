@@ -13,56 +13,59 @@ require("avante").setup({
   --
   provider = "claude",
 
-  -- -------------------------------------------------------------------
-  -- Claude (Anthropic) — default
-  -- Requires: export ANTHROPIC_API_KEY="your-key"
-  -- -------------------------------------------------------------------
-  claude = {
-    endpoint = "https://api.anthropic.com",
-    model = "claude-sonnet-4-20250514",  -- or "claude-opus-4", "claude-sonnet-4", etc.
-    timeout = 30000,
-    temperature = 0,
-    max_tokens = 4096,
+  -- All provider configs go inside this table (avante.nvim v2+ structure)
+  providers = {
+    -- -------------------------------------------------------------------
+    -- Claude (Anthropic) — default
+    -- Requires: export ANTHROPIC_API_KEY="your-key"
+    -- -------------------------------------------------------------------
+    claude = {
+      endpoint = "https://api.anthropic.com",
+      model = "claude-sonnet-4-20250514",  -- or "claude-opus-4", "claude-sonnet-4", etc.
+      timeout = 30000,
+      temperature = 0,
+      max_tokens = 4096,
+    },
+
+    -- -------------------------------------------------------------------
+    -- OpenAI — uncomment to use ChatGPT / GPT-4
+    -- Requires: export OPENAI_API_KEY="your-key"
+    -- -------------------------------------------------------------------
+    -- openai = {
+    --   endpoint = "https://api.openai.com/v1",
+    --   model = "gpt-4o",
+    --   timeout = 30000,
+    --   temperature = 0,
+    --   max_tokens = 4096,
+    -- },
+
+    -- -------------------------------------------------------------------
+    -- Moonshot (Kimi) — uncomment to use Kimi AI
+    -- Requires: export MOONSHOT_API_KEY="your-key"
+    -- Get your key at: https://platform.moonshot.cn/
+    -- -------------------------------------------------------------------
+    -- moonshot = {
+    --   endpoint = "https://api.moonshot.cn/v1",
+    --   model = "kimi-latest",  -- or "kimi-k2-5", "moonshot-v1-32k", etc.
+    --   timeout = 30000,
+    --   temperature = 0,
+    --   max_tokens = 4096,
+    --   api_key_name = "MOONSHOT_API_KEY",
+    -- },
+
+    -- -------------------------------------------------------------------
+    -- Copilot — uncomment to use GitHub Copilot
+    -- Requires: GitHub Copilot subscription + copilot.lua
+    -- -------------------------------------------------------------------
+    -- copilot = {
+    --   model = "gpt-4o-copilot",
+    --   proxy = nil,
+    --   allow_insecure = false,
+    --   timeout = 30000,
+    --   temperature = 0,
+    --   max_tokens = 4096,
+    -- },
   },
-
-  -- -------------------------------------------------------------------
-  -- OpenAI — uncomment to use ChatGPT / GPT-4
-  -- Requires: export OPENAI_API_KEY="your-key"
-  -- -------------------------------------------------------------------
-  -- openai = {
-  --   endpoint = "https://api.openai.com/v1",
-  --   model = "gpt-4o",
-  --   timeout = 30000,
-  --   temperature = 0,
-  --   max_tokens = 4096,
-  -- },
-
-  -- -------------------------------------------------------------------
-  -- Moonshot (Kimi) — uncomment to use Kimi AI
-  -- Requires: export MOONSHOT_API_KEY="your-key"
-  -- Get your key at: https://platform.moonshot.cn/
-  -- -------------------------------------------------------------------
-  -- moonshot = {
-  --   endpoint = "https://api.moonshot.cn/v1",
-  --   model = "kimi-latest",  -- or "kimi-k2-5", "moonshot-v1-32k", etc.
-  --   timeout = 30000,
-  --   temperature = 0,
-  --   max_tokens = 4096,
-  --   api_key_name = "MOONSHOT_API_KEY",
-  -- },
-
-  -- -------------------------------------------------------------------
-  -- Copilot — uncomment to use GitHub Copilot
-  -- Requires: GitHub Copilot subscription + copilot.lua
-  -- -------------------------------------------------------------------
-  -- copilot = {
-  --   model = "gpt-4o-copilot",
-  --   proxy = nil,
-  --   allow_insecure = false,
-  --   timeout = 30000,
-  --   temperature = 0,
-  --   max_tokens = 4096,
-  -- },
 
   -- ===================================================================
   -- BEHAVIOUR
