@@ -197,4 +197,10 @@ require('dropbar').setup({
 -- Keymaps
 local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<leader>dp', dropbar_api.pick, opts)
-vim.keymap.set('n', '<leader>dc', dropbar_api.close, opts)
+-- Close dropbar menu if open (get_current_dropbar_menu returns nil if none)
+vim.keymap.set('n', '<leader>dc', function()
+  local menu = dropbar_api.get_current_dropbar_menu()
+  if menu then
+    menu:close()
+  end
+end, opts)
