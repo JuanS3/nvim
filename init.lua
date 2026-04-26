@@ -38,7 +38,7 @@ require('plugins.autopairs')
 -- require('plugins.whichkey')    -> which-key: lazy por event; config movida a lazy.lua
 -- require('plugins.codesnap')    -> codesnap: lazy por cmd+keys+opts en lazy.lua
 -- require('plugins.specs')       -> specs: lazy por event+opts+keys en lazy.lua
-require('plugins.markdown')
+-- require('plugins.markdown')    -> render-markdown: lazy por ft+config en lazy.lua
 require('plugins.liveserver')
 require('plugins.notes')
 
