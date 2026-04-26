@@ -41,6 +41,12 @@ This is a **modern, performance-optimized Neovim configuration** built entirely 
 - 🌐 **Live Server** for web development
 - 📓 **Note-taking** system
 - 📝 **render-markdown.nvim** — beautiful Markdown rendering inside Neovim
+- 🧪 **neotest** — universal test runner (Python, Go, etc.)
+- 💡 **vim-illuminate** — highlight all occurrences of word under cursor
+- 🎯 **dropbar.nvim** — breadcrumbs in winbar
+- 🔗 **nvim-surround** — manipulate surroundings (ys, ds, cs)
+- 🔀 **diffview.nvim** — advanced Git diffs and merge conflicts
+- 🤖 **avante.nvim** — AI assistant (Cursor-like experience)
 - ⚡ **conform.nvim** — modern async formatting (black, prettier, stylua, rustfmt)
 - 🔥 **trouble.nvim** — elegant diagnostics and quickfix list
 - 🎯 **harpoon** — lightning-fast file bookmarks
@@ -557,6 +563,74 @@ Shows hidden files by default.
 
 ---
 
+### 🧪 Testing (Neotest)
+
+Universal test runner with inline results:
+- Run individual tests or whole files
+- See ✅/❌ results inline in the buffer
+- Debug tests via DAP
+- Summary panel with tree view of all tests
+
+Supported adapters configured:
+- **Python** — pytest
+- **Go** — go test
+
+---
+
+### 💡 vim-illuminate
+
+Automatically highlights all occurrences of the word under your cursor (like VS Code). Works with LSP, Treesitter, and regex fallback.
+
+Navigate between references with `<leader>ir` and `<leader>iR`.
+
+---
+
+### 🎯 Dropbar
+
+Breadcrumbs in the winbar showing your current location:
+```
+file.py > MyClass > my_method > if block
+```
+- Clickable (if your terminal supports it)
+- Press `<leader>dp` to pick a symbol via keyboard
+
+---
+
+### 🔗 nvim-surround
+
+Manipulate "surroundings" (quotes, brackets, tags) with ease:
+- `ysiw"` — surround inner word with quotes
+- `cs"'` — change double quotes to single quotes
+- `ds(` — delete surrounding parentheses
+- `yss[` — surround entire line with brackets
+
+---
+
+### 🔀 Diffview
+
+Professional Git diff interface:
+- Compare current changes against HEAD
+- Compare two branches
+- View full file history
+- Resolve merge conflicts visually
+
+---
+
+### 🤖 Avante.nvim
+
+AI assistant that brings the **Cursor IDE** experience inside Neovim:
+- Select code and ask for changes, explanations, or refactoring
+- Avante proposes the diff — you choose what to apply
+- Can create new files, rewrite functions, add tests
+- Supports Claude (default), OpenAI, Moonshot (Kimi), and Copilot
+
+**To set up your provider:**
+1. Get an API key (Anthropic, OpenAI, or Moonshot)
+2. Export it in your shell: `export ANTHROPIC_API_KEY="..."`
+3. Edit `lua/plugins/avante.lua` to switch provider if desired
+
+---
+
 ## Git Integration
 
 ### Gitsigns
@@ -595,6 +669,9 @@ For full debugging setup, install language-specific DAP adapters via Mason or ma
 | `:LiveServerStop`        | Stop live server                       |
 | `:LiveServerToggle`      | Toggle live server                     |
 | `:RenderMarkdown toggle` | Toggle Markdown rendering              |
+| `:DiffviewOpen`          | Open advanced Git diff view            |
+| `:DiffviewFileHistory`   | Open file history                      |
+| `:AvanteAsk`             | Ask the AI assistant                   |
 | `:Note`                  | Open note manager                      |
 | `:CodeSnap`              | Capture code snapshot (visual mode)    |
 | `:CodeSnapSave`          | Save code snapshot to file             |

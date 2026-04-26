@@ -333,6 +333,67 @@ require('lazy').setup(
       config = function() require('plugins.oil') end,
     },
 
+    -- --- Recommended: Testing & Productivity ---
+
+    -- Test runner (Python + Go adapters included)
+    {
+      'nvim-neotest/neotest',
+      event = 'VeryLazy',
+      dependencies = {
+        'nvim-lua/plenary.nvim',
+        'nvim-treesitter/nvim-treesitter',
+        'antoinemadec/FixCursorHold.nvim',
+        'nvim-neotest/neotest-python',
+        'nvim-neotest/neotest-go',
+      },
+      config = function() require('plugins.neotest') end,
+    },
+
+    -- Highlight all occurrences of word under cursor
+    {
+      'RRethy/vim-illuminate',
+      event = { 'BufReadPost', 'BufNewFile' },
+      config = function() require('plugins.illuminate') end,
+    },
+
+    -- Breadcrumbs in winbar (file > class > method)
+    {
+      'Bekaboo/dropbar.nvim',
+      event = { 'BufReadPost', 'BufNewFile' },
+      dependencies = { 'nvim-tree/nvim-web-devicons' },
+      config = function() require('plugins.dropbar') end,
+    },
+
+    -- Manipulate surroundings (ys, ds, cs)
+    {
+      'kylechui/nvim-surround',
+      event = 'VeryLazy',
+      config = function() require('plugins.surround') end,
+    },
+
+    -- Advanced Git diffs (branches, file history, merge conflicts)
+    {
+      'sindrets/diffview.nvim',
+      cmd = { 'DiffviewOpen', 'DiffviewFileHistory', 'DiffviewClose', 'DiffviewToggleFiles' },
+      config = function() require('plugins.diffview') end,
+    },
+
+    -- AI assistant (Cursor-like experience inside Neovim)
+    {
+      'yetone/avante.nvim',
+      event = 'VeryLazy',
+      version = false, -- Use latest
+      dependencies = {
+        'nvim-treesitter/nvim-treesitter',
+        'stevearc/dressing.nvim',
+        'nvim-lua/plenary.nvim',
+        'MunifTanjim/nui.nvim',
+        'nvim-tree/nvim-web-devicons',
+        'MeanderingProgrammer/render-markdown.nvim',
+      },
+      config = function() require('plugins.avante') end,
+    },
+
     -- Tmux Integration
     { 'christoomey/vim-tmux-navigator' }, -- Seamless navigation between Neovim panes and Tmux windows
   },
