@@ -36,10 +36,11 @@ This is a **modern, performance-optimized Neovim configuration** built entirely 
 - 📝 **Treesitter** powered syntax highlighting & text objects
 - 🤖 **Codeium** AI autocompletion
 - 📸 **CodeSnap** for beautiful code screenshots
-- 🔧 **Auto-formatting** on save via LSP/null-ls
+- 🔧 **Auto-formatting** on save via conform.nvim
 - 🐛 **DAP** debugging support
 - 🌐 **Live Server** for web development
 - 📓 **Note-taking** system
+- 📝 **render-markdown.nvim** — beautiful Markdown rendering inside Neovim
 - ⚡ **conform.nvim** — modern async formatting (black, prettier, stylua, rustfmt)
 - 🔥 **trouble.nvim** — elegant diagnostics and quickfix list
 - 🎯 **harpoon** — lightning-fast file bookmarks
@@ -52,22 +53,23 @@ This is a **modern, performance-optimized Neovim configuration** built entirely 
 
 Before using this configuration, ensure you have:
 
-| Requirement | Purpose |
-|-------------|---------|
-| **Neovim 0.11+** | This config uses modern APIs (`vim.lsp.config`, `vim.lsp.enable`) |
-| **Git** | Cloning plugins and LSP servers |
-| **Nerd Font** | Icons in file explorer, statusline, and UI (e.g., JetBrainsMono Nerd Font) |
-| **Node.js & npm** | Several LSP servers and tools depend on it |
-| **Bun** | Required by `live-server.nvim` build step |
-| **C Compiler** (gcc/clang) | For Treesitter parser compilation |
-| **Python 3 + uv** | For running Python files and tools |
-| **Rust (cargo)** | For `cargo run` support |
+| Requirement                | Purpose                                                                    |
+| -------------------------- | -------------------------------------------------------------------------- |
+| **Neovim 0.11+**           | This config uses modern APIs (`vim.lsp.config`, `vim.lsp.enable`)          |
+| **Git**                    | Cloning plugins and LSP servers                                            |
+| **Nerd Font**              | Icons in file explorer, statusline, and UI (e.g., JetBrainsMono Nerd Font) |
+| **Node.js & npm**          | Several LSP servers and tools depend on it                                 |
+| **Bun**                    | Required by `live-server.nvim` build step                                  |
+| **C Compiler** (gcc/clang) | For Treesitter parser compilation                                          |
+| **Python 3 + uv**          | For running Python files and tools                                         |
+| **Rust (cargo)**           | For `cargo run` support                                                    |
 
 ---
 
 ## First Launch
 
 1. **Start Neovim:**
+
    ```bash
    nvim
    ```
@@ -76,15 +78,19 @@ Before using this configuration, ensure you have:
 
 3. **Install LSP Servers:**
    Once inside Neovim, run:
+
    ```vim
    :MasonInstallAll
    ```
+
    This queues installation for all configured language servers.
 
 4. **Install Formatters/Linters:**
+
    ```vim
    :MasonInstallTools
    ```
+
    This installs formatters like `black`, `prettier`, `stylua`, `rustfmt`, etc.
 
 5. **Install Treesitter Parsers:**
@@ -102,200 +108,200 @@ Before using this configuration, ensure you have:
 
 ### 🏠 Basics
 
-| Key | Mode | Action |
-|-----|------|--------|
-| `<leader>w` | n | Save file (`:w`) |
-| `<leader>q` | n | Quit (`:q`) |
-| `<leader>qn` | n | Force quit (`:q!`) |
-| `<leader>wq` | n | Save and quit (`:wq`) |
-| `W` | c | Alias for `:write` |
-| `Q` | c | Alias for `:quit` |
-| `WQ` / `Wq` | c | Alias for `:wq` |
+| Key          | Mode | Action                |
+| ------------ | ---- | --------------------- |
+| `<leader>w`  | n    | Save file (`:w`)      |
+| `<leader>q`  | n    | Quit (`:q`)           |
+| `<leader>qn` | n    | Force quit (`:q!`)    |
+| `<leader>wq` | n    | Save and quit (`:wq`) |
+| `W`          | c    | Alias for `:write`    |
+| `Q`          | c    | Alias for `:quit`     |
+| `WQ` / `Wq`  | c    | Alias for `:wq`       |
 
 ### 🪟 Window Management
 
-| Key | Mode | Action |
-|-----|------|--------|
-| `<leader>sh` | n | Split window horizontally |
-| `<leader>sv` | n | Split window vertically |
-| `<leader><left>` | n | Decrease window width |
-| `<leader><right>` | n | Increase window width |
-| `<leader><up>` | n | Increase window height |
-| `<leader><down>` | n | Decrease window height |
+| Key               | Mode | Action                    |
+| ----------------- | ---- | ------------------------- |
+| `<leader>sh`      | n    | Split window horizontally |
+| `<leader>sv`      | n    | Split window vertically   |
+| `<leader><left>`  | n    | Decrease window width     |
+| `<leader><right>` | n    | Increase window width     |
+| `<leader><up>`    | n    | Increase window height    |
+| `<leader><down>`  | n    | Decrease window height    |
 
 ### 🔍 Navigation & Search
 
-| Key | Mode | Action |
-|-----|------|--------|
-| `n` / `N` | n | Next/previous search result (centered + specs animation) |
-| `<leader>h` | n | Clear search highlights (`:noh`) |
-| `H` / `L` | n, v | Jump to start/end of line (`^` / `$`) |
-| `<C-u>` / `<C-d>` | n | Scroll up/down (centered) |
-| `s` | n, x, o | **Flash Jump** — jump to any character |
-| `S` | n, x, o | **Flash Treesitter** — select Treesitter nodes |
-| `<leader>f_` | n, v | Jump to next underscore |
-| `<leader>F_` | n, v | Jump to previous underscore |
-| `<leader>f,` | n, v | Jump to next comma |
-| `<leader>F,` | n, v | Jump to previous comma |
-| `<leader>f(` ... `<leader>f}` | n, v | Jump to next bracket/parenthesis |
-| `<leader>F(` ... `<leader>F}` | n, v | Jump to previous bracket/parenthesis |
+| Key                           | Mode    | Action                                                   |
+| ----------------------------- | ------- | -------------------------------------------------------- |
+| `n` / `N`                     | n       | Next/previous search result (centered + specs animation) |
+| `<leader>h`                   | n       | Clear search highlights (`:noh`)                         |
+| `H` / `L`                     | n, v    | Jump to start/end of line (`^` / `$`)                    |
+| `<C-u>` / `<C-d>`             | n       | Scroll up/down (centered)                                |
+| `s`                           | n, x, o | **Flash Jump** — jump to any character                   |
+| `S`                           | n, x, o | **Flash Treesitter** — select Treesitter nodes           |
+| `<leader>f_`                  | n, v    | Jump to next underscore                                  |
+| `<leader>F_`                  | n, v    | Jump to previous underscore                              |
+| `<leader>f,`                  | n, v    | Jump to next comma                                       |
+| `<leader>F,`                  | n, v    | Jump to previous comma                                   |
+| `<leader>f(` ... `<leader>f}` | n, v    | Jump to next bracket/parenthesis                         |
+| `<leader>F(` ... `<leader>F}` | n, v    | Jump to previous bracket/parenthesis                     |
 
 ### 📋 Buffer Management
 
-| Key | Mode | Action |
-|-----|------|--------|
-| `<left>` / `<right>` | n | Previous/next buffer (BufferLine) |
-| `<leader>1` ... `<leader>9` | n | Go to buffer 1-9 |
-| `<leader>0` | n | Go to last buffer |
-| `<leader>x` | n | Close current buffer |
-| `<leader>m` | n | Switch to last buffer (`:b#`) |
-| `<leader>bs` | n | Sort buffers by directory |
+| Key                         | Mode | Action                            |
+| --------------------------- | ---- | --------------------------------- |
+| `<left>` / `<right>`        | n    | Previous/next buffer (BufferLine) |
+| `<leader>1` ... `<leader>9` | n    | Go to buffer 1-9                  |
+| `<leader>0`                 | n    | Go to last buffer                 |
+| `<leader>x`                 | n    | Close current buffer              |
+| `<leader>m`                 | n    | Switch to last buffer (`:b#`)     |
+| `<leader>bs`                | n    | Sort buffers by directory         |
 
 ### 📁 File Explorer (NvimTree)
 
-| Key | Mode | Action |
-|-----|------|--------|
-| `<C-b>` | n | Toggle NvimTree |
-| `<C-b>f` | n | Find and reveal current file in tree |
-| `<C-b>r` | n | Refresh NvimTree |
+| Key      | Mode | Action                               |
+| -------- | ---- | ------------------------------------ |
+| `<C-b>`  | n    | Toggle NvimTree                      |
+| `<C-b>f` | n    | Find and reveal current file in tree |
+| `<C-b>r` | n    | Refresh NvimTree                     |
 
 ### 🔭 Telescope (Fuzzy Finder)
 
-| Key | Mode | Action |
-|-----|------|--------|
-| `<C-p>` | n | Find files |
-| `<leader>fg` | n | Live grep (search text in files) |
-| `<leader>fb` | n | List open buffers |
-| `<leader>fh` | n | Search help tags |
-| `<leader>fk` | n | List all keymaps |
-| `<leader>fd` | n | List LSP diagnostics |
-| `<leader>fc` | n | Search Vim commands |
-| `<leader>gs` | n | Git status |
-| `<leader>gcm` | n | Git commits (global) |
-| `<leader>gb` | n | Git branches |
-| `<leader>gl` | n | Git commits for current buffer |
-| `<leader>gt` | n | Git stashes |
-| `<leader>ld` | n | LSP definitions |
-| `<leader>lr` | n | LSP references |
-| `<leader>li` | n | LSP implementations |
-| `<leader>lh` | n | LSP type definitions |
-| `<leader>ls` | n | Document symbols |
-| `<leader>lw` | n | Workspace symbols |
-| `<leader>ms` | n | Telescope symbols picker |
+| Key           | Mode | Action                           |
+| ------------- | ---- | -------------------------------- |
+| `<C-p>`       | n    | Find files                       |
+| `<leader>fg`  | n    | Live grep (search text in files) |
+| `<leader>fb`  | n    | List open buffers                |
+| `<leader>fh`  | n    | Search help tags                 |
+| `<leader>fk`  | n    | List all keymaps                 |
+| `<leader>fd`  | n    | List LSP diagnostics             |
+| `<leader>fc`  | n    | Search Vim commands              |
+| `<leader>gs`  | n    | Git status                       |
+| `<leader>gcm` | n    | Git commits (global)             |
+| `<leader>gb`  | n    | Git branches                     |
+| `<leader>gl`  | n    | Git commits for current buffer   |
+| `<leader>gt`  | n    | Git stashes                      |
+| `<leader>ld`  | n    | LSP definitions                  |
+| `<leader>lr`  | n    | LSP references                   |
+| `<leader>li`  | n    | LSP implementations              |
+| `<leader>lh`  | n    | LSP type definitions             |
+| `<leader>ls`  | n    | Document symbols                 |
+| `<leader>lw`  | n    | Workspace symbols                |
+| `<leader>ms`  | n    | Telescope symbols picker         |
 
 ### 🧠 LSP (Language Server Protocol)
 
-| Key | Mode | Action |
-|-----|------|--------|
-| `gd` | n | Go to definition (Lspsaga) |
-| `gD` | n | Go to declaration |
-| `K` | n | Hover documentation (Lspsaga) |
-| `gi` | n | Go to implementation |
-| `gr` | n | Show references (Lspsaga) |
-| `<leader>D` | n | Type definition |
-| `<leader>rn` | n | Rename symbol (Lspsaga) |
-| `<leader>ca` | n | Code action (Lspsaga) |
-| `<leader>f` | n | Format buffer (async) |
-| `<leader>ne` | n | Next diagnostic |
-| `<leader>pe` | n | Previous diagnostic |
-| `<leader>d` | n | Show line diagnostics (Lspsaga) |
-| `<leader>D` | n | Show buffer diagnostics (Lspsaga) |
-| `<leader>o` | n | Toggle outline (symbols) |
-| `<leader>t` | n | Toggle Lspsaga terminal |
-| `<leader>wa` | n | Add workspace folder |
-| `<leader>wr` | n | Remove workspace folder |
-| `<leader>wl` | n | List workspace folders |
-| `<leader>ws` | n | Search workspace symbols |
+| Key          | Mode | Action                            |
+| ------------ | ---- | --------------------------------- |
+| `gd`         | n    | Go to definition (Lspsaga)        |
+| `gD`         | n    | Go to declaration                 |
+| `K`          | n    | Hover documentation (Lspsaga)     |
+| `gi`         | n    | Go to implementation              |
+| `gr`         | n    | Show references (Lspsaga)         |
+| `<leader>D`  | n    | Type definition                   |
+| `<leader>rn` | n    | Rename symbol (Lspsaga)           |
+| `<leader>ca` | n    | Code action (Lspsaga)             |
+| `<leader>f`  | n    | Format buffer (async)             |
+| `<leader>ne` | n    | Next diagnostic                   |
+| `<leader>pe` | n    | Previous diagnostic               |
+| `<leader>d`  | n    | Show line diagnostics (Lspsaga)   |
+| `<leader>D`  | n    | Show buffer diagnostics (Lspsaga) |
+| `<leader>o`  | n    | Toggle outline (symbols)          |
+| `<leader>t`  | n    | Toggle Lspsaga terminal           |
+| `<leader>wa` | n    | Add workspace folder              |
+| `<leader>wr` | n    | Remove workspace folder           |
+| `<leader>wl` | n    | List workspace folders            |
+| `<leader>ws` | n    | Search workspace symbols          |
 
 ### 🔧 Code Editing
 
-| Key | Mode | Action |
-|-----|------|--------|
-| `J` / `K` | v | Move selected lines down/up |
+| Key         | Mode | Action                        |
+| ----------- | ---- | ----------------------------- |
+| `J` / `K`   | v    | Move selected lines down/up   |
 | `<leader>/` | n, v | Toggle comment (nvim-comment) |
-| `<M-e>` | i | Fast wrap with autopairs |
-| `<CR>` | i | Confirm completion selection |
-| `<C-Space>` | i | Trigger completion manually |
-| `<C-e>` | i | Abort completion |
-| `<leader>v` | n | Show specs cursor animation |
+| `<M-e>`     | i    | Fast wrap with autopairs      |
+| `<CR>`      | i    | Confirm completion selection  |
+| `<C-Space>` | i    | Trigger completion manually   |
+| `<C-e>`     | i    | Abort completion              |
+| `<leader>v` | n    | Show specs cursor animation   |
 
 ### 🌳 Treesitter Text Objects (Visual Mode)
 
-| Key | Target |
-|-----|--------|
-| `af` / `if` | Around / Inside function |
-| `ac` / `ic` | Around / Inside class |
-| `al` / `il` | Around / Inside loop |
-| `ab` / `ib` | Around / Inside block |
-| `ap` / `ip` | Around / Inside parameter |
-| `a/` / `i/` | Around / Inside comment |
-| `as` / `is` | Around / Inside statement |
-| `aq` / `iq` | Around / Inside quotes |
+| Key         | Target                     |
+| ----------- | -------------------------- |
+| `af` / `if` | Around / Inside function   |
+| `ac` / `ic` | Around / Inside class      |
+| `al` / `il` | Around / Inside loop       |
+| `ab` / `ib` | Around / Inside block      |
+| `ap` / `ip` | Around / Inside parameter  |
+| `a/` / `i/` | Around / Inside comment    |
+| `as` / `is` | Around / Inside statement  |
+| `aq` / `iq` | Around / Inside quotes     |
 | `a=` / `i=` | Around / Inside assignment |
 
 ### 🌳 Treesitter Movement
 
-| Key | Action |
-|-----|--------|
+| Key         | Action                         |
+| ----------- | ------------------------------ |
 | `]m` / `[m` | Next / previous function start |
-| `]M` / `[M` | Next / previous function end |
-| `]]` / `[[` | Next / previous class start |
-| `][` / `[]` | Next / previous class end |
-| `<leader>a` | Swap parameter with next |
-| `<leader>A` | Swap parameter with previous |
+| `]M` / `[M` | Next / previous function end   |
+| `]]` / `[[` | Next / previous class start    |
+| `][` / `[]` | Next / previous class end      |
+| `<leader>a` | Swap parameter with next       |
+| `<leader>A` | Swap parameter with previous   |
 
 ### 🐛 Debugging (DAP)
 
-| Key | Mode | Action |
-|-----|------|--------|
-| `<F9>` | n | Toggle breakpoint |
-| `<F10>` | n | Continue / start debugging |
+| Key     | Mode | Action                     |
+| ------- | ---- | -------------------------- |
+| `<F9>`  | n    | Toggle breakpoint          |
+| `<F10>` | n    | Continue / start debugging |
 
 ### 🚀 Productivity & Navigation
 
-| Key | Mode | Action |
-|-----|------|--------|
-| `<leader>cf` | n, v | Format with conform.nvim |
-| `<leader>xx` | n | Trouble: workspace diagnostics |
-| `<leader>xX` | n | Trouble: document diagnostics |
-| `<leader>xq` | n | Trouble: quickfix list |
-| `<leader>xl` | n | Trouble: location list |
-| `<leader>cs` | n | Trouble: document symbols |
-| `<leader>cl` | n | Trouble: LSP references |
-| `<leader>ha` | n | Harpoon: add current file |
-| `<leader>hh` | n | Harpoon: toggle quick menu |
-| `<leader>h1` .. `<leader>h5` | n | Harpoon: jump to file 1-5 |
-| `<leader>td` | n | Search TODOs with Telescope |
-| `<leader>tq` | n | Open TODOs in Trouble |
-| `<leader>e` | n | Open oil.nvim (current dir) |
-| `-` | n | Open oil.nvim (parent dir) |
+| Key                          | Mode | Action                         |
+| ---------------------------- | ---- | ------------------------------ |
+| `<leader>cf`                 | n, v | Format with conform.nvim       |
+| `<leader>xx`                 | n    | Trouble: workspace diagnostics |
+| `<leader>xX`                 | n    | Trouble: document diagnostics  |
+| `<leader>xq`                 | n    | Trouble: quickfix list         |
+| `<leader>xl`                 | n    | Trouble: location list         |
+| `<leader>cs`                 | n    | Trouble: document symbols      |
+| `<leader>cl`                 | n    | Trouble: LSP references        |
+| `<leader>ha`                 | n    | Harpoon: add current file      |
+| `<leader>hh`                 | n    | Harpoon: toggle quick menu     |
+| `<leader>h1` .. `<leader>h5` | n    | Harpoon: jump to file 1-5      |
+| `<leader>td`                 | n    | Search TODOs with Telescope    |
+| `<leader>tq`                 | n    | Open TODOs in Trouble          |
+| `<leader>e`                  | n    | Open oil.nvim (current dir)    |
+| `-`                          | n    | Open oil.nvim (parent dir)     |
 
 ### ⚡ Run Code
 
-| Key | Mode | Action |
-|-----|------|--------|
-| `<F5>` | n | Run current file (Python: `uv run`, Go: `go run`, Rust: `cargo run`) |
-| `<F6>` | n | Run unit tests (Python: `unittest`, Go: `go test`) |
+| Key    | Mode | Action                                                               |
+| ------ | ---- | -------------------------------------------------------------------- |
+| `<F5>` | n    | Run current file (Python: `uv run`, Go: `go run`, Rust: `cargo run`) |
+| `<F6>` | n    | Run unit tests (Python: `unittest`, Go: `go test`)                   |
 
 ### 📝 Markdown & Notes
 
-| Key | Mode | Action |
-|-----|------|--------|
-| `<leader>md` | n | Toggle Markdown preview in browser |
-| `<leader>nn` | n | Open note prompt (`:Note `) |
+| Key          | Mode | Action                             |
+| ------------ | ---- | ---------------------------------- |
+| `<leader>md` | n    | Toggle Markdown preview in browser |
+| `<leader>nn` | n    | Open note prompt (`:Note `)        |
 
 ### 🌐 Web Development
 
-| Key | Mode | Action |
-|-----|------|--------|
-| `<leader>lc` | n | Toggle Live Server (port 5000) |
+| Key          | Mode | Action                         |
+| ------------ | ---- | ------------------------------ |
+| `<leader>lc` | n    | Toggle Live Server (port 5000) |
 
 ### 📸 CodeSnap
 
-| Key | Mode | Action |
-|-----|------|--------|
-| `<leader>ca` | x | Copy code snapshot to clipboard |
-| `<leader>cs` | x | Save code snapshot to `~/Pictures` |
+| Key          | Mode | Action                             |
+| ------------ | ---- | ---------------------------------- |
+| `<leader>ca` | x    | Copy code snapshot to clipboard    |
+| `<leader>cs` | x    | Save code snapshot to `~/Pictures` |
 
 ---
 
@@ -304,10 +310,13 @@ Before using this configuration, ensure you have:
 ### 🎨 UI & Theme
 
 #### Tokyo Night
+
 The colorscheme is **Tokyo Night** with a custom dark palette optimized for long coding sessions.
 
 #### Alpha (Dashboard)
+
 On startup, you'll see a **Datolytix** branded dashboard with quick actions:
+
 - `e` — New file
 - `f` — Find file
 - `g` — Live grep
@@ -318,39 +327,60 @@ On startup, you'll see a **Datolytix** branded dashboard with quick actions:
 - `q` — Quit
 
 #### Noice
+
 Replaces the default command-line and messages UI with a modern floating interface:
+
 - Command palette style for `:` commands
 - Rounded borders on popups
 - Bottom search bar for `/` and `?`
 
 #### Lualine
+
 A fast statusline showing:
+
 - **Mode** → **Git branch/diff/diagnostics** → **Filename** → **Encoding/format/type** → **Progress** → **Location**
 
 #### Bufferline
+
 Elegant buffer tabs at the top:
+
 - **Slant** style separators
 - LSP diagnostics indicators (errors/warnings)
 - Buffer numbers with Powerline symbols
 - `<left>` / `<right>` to cycle buffers
 
 #### Indent Blankline
+
 Rainbow-colored indentation guides that help you visually track code blocks.
 
 #### Specs
+
 A visual cursor indicator that animates when you jump (search results, etc.).
+
+#### Render Markdown
+
+Beautiful Markdown rendering directly inside Neovim — no browser, no Node.js required.
+
+- **Headings** with icons and background highlights (6 levels)
+- **Code blocks** with language icons and background
+- **Checkboxes** — `-[ ]` and `-[x]` render as elegant icons
+- **Tables** with aligned borders
+- **Quotes**, **bullet lists**, **horizontal rules**, **links**, **images**
+- Toggle rendering anytime with `<leader>md`
 
 ---
 
 ### 🔍 Fuzzy Finding (Telescope)
 
 Telescope is your universal search tool. Key features:
+
 - **Find files** (`<C-p>`) — ignores `node_modules`, `__pycache__`, `.git`, build dirs
 - **Live grep** (`<leader>fg`) — search text across all files
 - **Git integration** — status, commits, branches, stashes
 - **LSP integration** — definitions, references, symbols, diagnostics
 
 **Inside Telescope:**
+
 - `<CR>` — Select/open item
 - `<C-c>` — Close Telescope
 - Navigate with `<Up>` / `<Down>`
@@ -360,6 +390,7 @@ Telescope is your universal search tool. Key features:
 ### 🌳 File Explorer (NvimTree)
 
 A sidebar file tree with:
+
 - **Git status** icons (staged, modified, untracked, deleted)
 - **LSP diagnostics** indicators
 - **Custom icons** for folders and files (requires Nerd Font)
@@ -367,6 +398,7 @@ A sidebar file tree with:
 - **Auto-close** when it's the last window
 
 **Tree Filters:**
+
 - Dotfiles are shown
 - Git-ignored files are hidden
 - Excludes: `.pyc`, `.DS_Store`, `__pycache__`, `.vscode`, `.idea`
@@ -379,27 +411,28 @@ A sidebar file tree with:
 
 The following LSP servers are pre-configured:
 
-| Language | Server | Features |
-|----------|--------|----------|
-| Lua | `lua_ls` | Full Lua support with `vim` globals |
-| Python | `pyright` + `ruff` | Type checking + linting/formatting |
-| TypeScript / JS | `ts_ls` | IntelliSense, diagnostics |
-| Rust | `rust_analyzer` | Full Rust IDE experience |
-| JSON | `jsonls` | Schema validation |
-| YAML | `yamlls` | Validation, Kubernetes schemas |
-| Docker | `dockerls` | Dockerfile validation |
-| C/C++ | `clangd` | Code completion, diagnostics |
-| Bash | `bashls` | Shell script analysis |
-| HTML | `html` | Tag validation |
-| CSS | `cssls` | Style linting |
-| Markdown | `marksman` | Document navigation |
-| LaTeX | `ltex` | Grammar/spelling |
-| SQL | `sqlls` | Query analysis |
-| Tailwind | `tailwindcss` | Utility class IntelliSense |
+| Language        | Server             | Features                            |
+| --------------- | ------------------ | ----------------------------------- |
+| Lua             | `lua_ls`           | Full Lua support with `vim` globals |
+| Python          | `pyright` + `ruff` | Type checking + linting/formatting  |
+| TypeScript / JS | `ts_ls`            | IntelliSense, diagnostics           |
+| Rust            | `rust_analyzer`    | Full Rust IDE experience            |
+| JSON            | `jsonls`           | Schema validation                   |
+| YAML            | `yamlls`           | Validation, Kubernetes schemas      |
+| Docker          | `dockerls`         | Dockerfile validation               |
+| C/C++           | `clangd`           | Code completion, diagnostics        |
+| Bash            | `bashls`           | Shell script analysis               |
+| HTML            | `html`             | Tag validation                      |
+| CSS             | `cssls`            | Style linting                       |
+| Markdown        | `marksman`         | Document navigation                 |
+| LaTeX           | `ltex`             | Grammar/spelling                    |
+| SQL             | `sqlls`            | Query analysis                      |
+| Tailwind        | `tailwindcss`      | Utility class IntelliSense          |
 
 #### Autocompletion (nvim-cmp)
 
 Completion sources (in priority order):
+
 1. **LuaSnip** — Code snippets
 2. **Codeium** — AI-powered suggestions
 3. **nvim_lsp** — Language server suggestions
@@ -407,6 +440,7 @@ Completion sources (in priority order):
 5. **Buffer** — Words from open buffers
 
 **Completion UI:**
+
 - Color-coded by type (Function, Variable, Class, etc.)
 - Custom **Codeium** icon (󱐋)
 - Documentation popup with rounded borders
@@ -421,6 +455,7 @@ Files are automatically formatted on save via LSP (`async = true` for no UI bloc
 ### 🤖 AI Completion (Codeium)
 
 Codeium provides free AI-powered code suggestions:
+
 - Appears inline in the completion menu with a 󱐋 icon
 - Works across all configured languages
 - Zero configuration required after installation
@@ -435,6 +470,7 @@ Advanced syntax highlighting and code manipulation:
 `bash`, `c`, `cpp`, `css`, `dockerfile`, `go`, `html`, `java`, `javascript`, `json`, `lua`, `make`, `python`, `rust`, `toml`, `typescript`, `yaml`, `markdown`, `vimdoc`, `regex`
 
 **Features:**
+
 - Incremental selection (`<CR>` to expand, `<BS>` to shrink)
 - Smart text objects (`af`, `if`, `ac`, `ic`, etc.)
 - Context-aware commenting
@@ -446,6 +482,7 @@ Advanced syntax highlighting and code manipulation:
 ### 🔧 Formatting (conform.nvim)
 
 Modern async formatting with fallback to LSP:
+
 - **Lua**: `stylua`
 - **Python**: `isort` → `black`
 - **JS/TS/JSON/YAML/HTML/CSS/Markdown**: `prettier`
@@ -460,6 +497,7 @@ Formats on save automatically. If no formatter is configured for the filetype, i
 ### 🔥 Trouble
 
 A beautiful diagnostics and quickfix list:
+
 - `<leader>xx` — All workspace diagnostics
 - `<leader>xX` — Current buffer diagnostics only
 - `<leader>xq` — Quickfix list
@@ -474,6 +512,7 @@ Navigate with `j/k`, press `<CR>` to jump, `q` to close.
 ### 🎯 Harpoon
 
 Mark files and jump between them instantly:
+
 - `<leader>ha` — Add current file to the list
 - `<leader>hh` — Open the harpoon menu
 - `<leader>h1` .. `<leader>h5` — Jump directly to file 1-5
@@ -485,6 +524,7 @@ Perfect when you're working across 3-5 files and don't want to cycle through all
 ### ✅ Todo Comments
 
 Automatically highlights these keywords in comments:
+
 - `TODO:` — Blue
 - `FIX:` / `FIXME:` / `BUG:` — Red
 - `HACK:` — Yellow
@@ -500,10 +540,12 @@ Search them with `<leader>td` (Telescope) or `<leader>tq` (Trouble).
 ### 🗂️ Oil
 
 Edit your filesystem as if it were a normal buffer:
-- `<leader>e` — Open oil in the current directory
+
+- `leader>e` — Open oil in the current directory
 - `-` — Open oil in the parent directory
 
 Inside oil:
+
 - `dd` — Delete file/directory
 - `cw` — Rename
 - `yy` — Copy
@@ -520,6 +562,7 @@ Shows hidden files by default.
 ### Gitsigns
 
 Real-time Git diff indicators in the sign column:
+
 - **Additions** (󰌴), **changes** (󰑌), **deletions** (󰗨), **untracked** (⟴)
 - **Line number highlighting** for changed lines
 - **Current line blame** (shows author, date, commit message at end of line)
@@ -530,6 +573,7 @@ Real-time Git diff indicators in the sign column:
 ## Debugging
 
 Basic DAP (Debug Adapter Protocol) support is included:
+
 - `<F9>` — Toggle breakpoint
 - `<F10>` — Continue / start debugging
 
@@ -539,21 +583,21 @@ For full debugging setup, install language-specific DAP adapters via Mason or ma
 
 ## Custom Commands
 
-| Command | Description |
-|---------|-------------|
-| `:Mason` | Open Mason UI to manage LSPs/tools |
-| `:MasonInstallAll` | Install all pre-configured LSP servers |
-| `:MasonInstallTools` | Install all formatters/linters |
-| `:Lazy` | Open Lazy.nvim plugin manager |
-| `:TSUpdate` | Update Treesitter parsers |
-| `:NvimTreeToggle` | Toggle file explorer |
-| `:LiveServerStart` | Start live server on port 5000 |
-| `:LiveServerStop` | Stop live server |
-| `:LiveServerToggle` | Toggle live server |
-| `:MarkdownPreviewToggle` | Toggle Markdown preview |
-| `:Note` | Open note manager |
-| `:CodeSnap` | Capture code snapshot (visual mode) |
-| `:CodeSnapSave` | Save code snapshot to file |
+| Command                  | Description                            |
+| ------------------------ | -------------------------------------- |
+| `:Mason`                 | Open Mason UI to manage LSPs/tools     |
+| `:MasonInstallAll`       | Install all pre-configured LSP servers |
+| `:MasonInstallTools`     | Install all formatters/linters         |
+| `:Lazy`                  | Open Lazy.nvim plugin manager          |
+| `:TSUpdate`              | Update Treesitter parsers              |
+| `:NvimTreeToggle`        | Toggle file explorer                   |
+| `:LiveServerStart`       | Start live server on port 5000         |
+| `:LiveServerStop`        | Stop live server                       |
+| `:LiveServerToggle`      | Toggle live server                     |
+| `:RenderMarkdown toggle` | Toggle Markdown rendering              |
+| `:Note`                  | Open note manager                      |
+| `:CodeSnap`              | Capture code snapshot (visual mode)    |
+| `:CodeSnapSave`          | Save code snapshot to file             |
 
 ---
 
@@ -578,7 +622,7 @@ For full debugging setup, install language-specific DAP adapters via Mason or ma
 │       ├── gitsigns.lua     # Git integration
 │       ├── treesitter.lua   # Syntax highlighting
 │       ├── autopairs.lua    # Auto-close brackets
-│       ├── markdown.lua     # Markdown preview keymap
+│       ├── markdown.lua     # Render-markdown config and toggle keymap
 │       ├── notes.lua        # Note-taking config
 │       ├── liveserver.lua   # Live server config
 │       ├── specs.lua        # Cursor animation
@@ -598,18 +642,23 @@ For full debugging setup, install language-specific DAP adapters via Mason or ma
 ## Troubleshooting
 
 ### "attempt to yield across C-call boundary" error
+
 This was fixed by disabling `automatic_installation` in Mason and wrapping `mason-null-ls` setup in `vim.defer_fn`. If you see this, ensure your Neovim is **0.11+**.
 
 ### Icons not showing
+
 Install a **Nerd Font** and configure your terminal to use it.
 
 ### LSP not attaching
+
 Run `:Mason` and ensure the server is installed. Then restart Neovim.
 
 ### Slow startup
+
 Run `:Lazy profile` to see which plugins take the most time. Most plugins here are lazy-loaded.
 
 ### Python formatting not working
+
 Ensure `black`, `isort`, and `ruff` are installed via `:MasonInstallTools`.
 
 ---
@@ -626,4 +675,4 @@ Ensure `black`, `isort`, and `ruff` are installed via `:MasonInstallTools`.
 
 ---
 
-*Happy coding! 🚀*
+_Happy coding! 🚀_

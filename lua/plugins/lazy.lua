@@ -193,38 +193,15 @@ require('lazy').setup(
     -- Autosave
     { 'Pocco81/auto-save.nvim', event = { 'BufReadPost', 'BufNewFile' }, opts = {} },
 
-    -- Markdown Preview
+    -- Markdown rendering inside Neovim (no browser, no Node.js)
     {
-      'iamcco/markdown-preview.nvim',
-      cmd = { 'MarkdownPreviewToggle' },
+      'MeanderingProgrammer/render-markdown.nvim',
+      dependencies = {
+        'nvim-treesitter/nvim-treesitter',
+        'nvim-tree/nvim-web-devicons',
+      },
       ft = { 'markdown' },
-      init = function()
-        -- FIX: Neovim no carga el entorno de nvm. Detectamos Node.js manualmente
-        -- antes de que el plugin se instale/compile para usar la versión correcta.
-        local nvm_nodes = vim.fn.glob('~/.nvm/versions/node/*/bin/node', false, true)
-        if #nvm_nodes > 0 then
-          table.sort(nvm_nodes)
-          vim.g.mkdp_node_path = nvm_nodes[#nvm_nodes]
-        else
-          local node_in_path = vim.fn.exepath('node')
-          if node_in_path ~= '' then
-            vim.g.mkdp_node_path = node_in_path
-          end
-        end
-      end,
-      build = function()
-        -- FIX: El script mkdp#util#install() descarga un bundle pre-compilado que
-        -- a veces falla o queda incompleto (falta tslib). Instalamos las deps
-        -- directamente con npm del Node.js detectado en el directorio app/.
-        local app_dir = vim.fn.stdpath('data') .. '/lazy/markdown-preview.nvim/app'
-        local node = vim.g.mkdp_node_path or 'node'
-        local npm = vim.fn.fnamemodify(node, ':h') .. '/npm'
-        vim.fn.system({
-          'sh', '-c',
-          'cd ' .. vim.fn.shellescape(app_dir) .. ' && '
-            .. vim.fn.shellescape(npm) .. ' install --production'
-        })
-      end,
+      config = function() require('plugins.markdown') end,
     },
 
     -- Notes
