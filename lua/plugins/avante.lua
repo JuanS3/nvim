@@ -23,8 +23,10 @@ require("avante").setup({
       endpoint = "https://api.anthropic.com",
       model = "claude-sonnet-4-20250514",  -- or "claude-opus-4", "claude-sonnet-4", etc.
       timeout = 30000,
-      temperature = 0,
-      max_tokens = 4096,
+      extra_request_body = {
+        temperature = 0,
+        max_tokens = 4096,
+      },
     },
 
     -- -------------------------------------------------------------------
@@ -35,8 +37,10 @@ require("avante").setup({
     --   endpoint = "https://api.openai.com/v1",
     --   model = "gpt-4o",
     --   timeout = 30000,
-    --   temperature = 0,
-    --   max_tokens = 4096,
+    --   extra_request_body = {
+    --     temperature = 0,
+    --     max_tokens = 4096,
+    --   },
     -- },
 
     -- -------------------------------------------------------------------
@@ -48,9 +52,11 @@ require("avante").setup({
     --   endpoint = "https://api.moonshot.cn/v1",
     --   model = "kimi-latest",  -- or "kimi-k2-5", "moonshot-v1-32k", etc.
     --   timeout = 30000,
-    --   temperature = 0,
-    --   max_tokens = 4096,
     --   api_key_name = "MOONSHOT_API_KEY",
+    --   extra_request_body = {
+    --     temperature = 0,
+    --     max_tokens = 4096,
+    --   },
     -- },
 
     -- -------------------------------------------------------------------
@@ -62,8 +68,10 @@ require("avante").setup({
     --   proxy = nil,
     --   allow_insecure = false,
     --   timeout = 30000,
-    --   temperature = 0,
-    --   max_tokens = 4096,
+    --   extra_request_body = {
+    --     temperature = 0,
+    --     max_tokens = 4096,
+    --   },
     -- },
   },
 
