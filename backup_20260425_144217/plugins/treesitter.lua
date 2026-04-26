@@ -9,15 +9,14 @@ treesitter.setup({
   ensure_installed = {
     'bash', 'c', 'cpp', 'css', 'dockerfile', 'go', 'html', 'java', 'javascript',
     'json', 'lua', 'make', 'python', 'rust', 'toml', 'typescript', 'yaml',
-    -- FIX: Añadidos parsers esenciales para nvim 0.11+ (help, markdown, regex)
-    'markdown',
-    'markdown_inline',
-    'vimdoc',
-    'regex',
+    -- Consider adding:
+    -- 'markdown',          -- For better Markdown highlighting
+    -- 'markdown_inline',   -- For inline Markdown elements
+    -- 'vimdoc',            -- For Neovim help files
+    -- 'regex',             -- For regular expressions
+    -- 'query',             -- For Treesitter queries themselves
+    -- 'luap',              -- For Lua patterns (if you use them)
   },
-
-  -- FIX: auto_install asegura que parsers faltantes se instalen bajo demanda
-  auto_install = true,
 
   -- Enable Tree-sitter powered syntax highlighting.
   highlight = {

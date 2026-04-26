@@ -17,8 +17,7 @@ gitsigns.setup({
   -- Enable/disable features that display in the sign column or line.
   signcolumn = true, -- Show signs in the sign column (left gutter)
   numhl = true,      -- Highlight line numbers for changed lines
-  -- FIX: linehl=true causaba lag de redibujado en archivos grandes.
-  linehl = false,    -- Highlight the entire line for changed lines
+  linehl = true,     -- Highlight the entire line for changed lines
   word_diff = false, -- Show word-level differences. Can be noisy, so 'false' is common.
 
   -- Watch the Git directory for changes.
@@ -34,8 +33,7 @@ gitsigns.setup({
   current_line_blame_opts = {
     virt_text = true,          -- Display blame information as virtual text
     virt_text_pos = "eol",     -- Position of the virtual text: 'eol' (end of line) | 'overlay' | 'right_align'
-    -- FIX: delay=100ms generaba demasiadas llamadas a git en repos grandes.
-    delay = 1000,              -- Delay before showing blame (1s es un buen balance)
+    delay = 100,               -- Delay before showing blame (changed from 1000 to 100 for faster feedback)
     ignore_whitespace = false, -- Include whitespace changes in blame (usually false is good)
   },
   -- Formatter for the current line blame virtual text.

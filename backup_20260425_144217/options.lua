@@ -19,12 +19,15 @@ opt.smartindent = true -- Smart indentation for C-like languages
 opt.clipboard = "unnamedplus" -- Use system clipboard for yank, delete, put operations
 
 -- UI Blending
-opt.winbl = 0 -- FIX: winbl=20 causaba blur en ventanas flotantes. 0 = sin blending.
+opt.winbl = 20 -- Disable window blending by default, as '20' can make things blurry.
+-- You might want this if you use floating windows (like Noice),
+-- but set it to 0 initially and adjust per plugin if needed.
 
 -- Cursor Highlighting
 opt.cursorline = true   -- Highlight the current line
--- FIX: cursorcolumn=true causa lag de redibujado en terminales y archivos grandes.
-opt.cursorcolumn = false
+opt.cursorcolumn = true -- Generally set to false to avoid visual clutter.
+-- It can make text hard to read in some contexts.
+-- Consider removing or setting to false unless explicitly needed.
 
 -- Performance Settings
 -- opt.lazyredraw = true  -- Don't redraw screen during macro playback
@@ -115,20 +118,17 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- Remove trailing whitespace from all lines before saving a file
--- FIX: Se añade condición para NO ejecutar en archivos > 5MB (rendimiento)
 local CleanOnSave = vim.api.nvim_create_augroup('CleanOnSave', { clear = true })
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   group = CleanOnSave,
   pattern = "*",
-  callback = function()
-    local max_size = 5 * 1024 * 1024 -- 5 MB
-    local buf_size = vim.fn.getfsize(vim.api.nvim_buf_get_name(0))
-    if buf_size > 0 and buf_size < max_size then
-      vim.cmd([[%s/\s\+$//e]])
-    end
-  end,
+  command = [[%s/\s\+$//e]],
 })
 
--- FIX: Removido auto-format con Black vía BufWritePost.
--- El formateo se delega al LSP/null-ls en BufWritePre (ver lua/plugins/lsp/init.lua)
--- para evitar bloqueo sincrónico del editor. Black ya está instalado vía Mason/null-ls.
+-- Auto-format Python files with Black on save
+local Black = vim.api.nvim_create_augroup("Black", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePost", {
+  group = Black,
+  pattern = "*.py",
+  command = "silent !black %",
+})

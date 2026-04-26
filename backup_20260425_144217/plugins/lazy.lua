@@ -40,11 +40,7 @@ require('lazy').setup(
     { 'lukas-reineke/indent-blankline.nvim', main = 'ibl' }, -- 'main = 'ibl' is good for easy requiring
 
     -- Highlights colors
-    {
-      'brenoprata10/nvim-highlight-colors',
-      event = { 'BufReadPost', 'BufNewFile' },
-      opts = { render = 'virtual', enable_named_colors = true, enable_tailwind = true, enable_italics = true },
-    }, -- Highlights hex codes, RGB, HSL colors
+    { 'brenoprata10/nvim-highlight-colors' }, -- Highlights hex codes, RGB, HSL colors
 
     -- Notifications and UI
     {
@@ -58,67 +54,41 @@ require('lazy').setup(
     },
 
     -- Cursor (assuming 'JuanS3/specs.nvim' is a cursor/visual indicator plugin)
-    {
-      'JuanS3/specs.nvim',
-      event = { 'BufReadPost', 'BufNewFile' },
-      opts = {
-        popup = { inc_ms = 10, width = 120, winhl = 'Search' },
-      },
-      keys = {
-        { '<leader>v', function() require('specs').show_specs() end, mode = 'n', desc = 'Show specs' },
-        -- FIX: specs.nvim sobreescribía 'n'/'N' perdiendo el centrado (nzzzv).
-        -- Se preserva nzzzv / Nzzzv y luego se invoca specs.show_specs().
-        { 'n', 'nzzzv<Cmd>lua require("specs").show_specs()<CR>', mode = 'n', noremap = true, silent = true },
-        { 'N', 'Nzzzv<Cmd>lua require("specs").show_specs()<CR>', mode = 'n', noremap = true, silent = true },
-      },
-    },
+    { 'JuanS3/specs.nvim' },
 
     -- --- Core Editing Features ---
     -- Tree-sitter for Syntax Highlighting & Text Objects
-    -- FIX: Pinchado a v0.10.0 porque versiones recientes (post c82bf96f) dropean soporte nvim 0.11.
-    -- El usuario tiene NVIM v0.11.6; nvim-treesitter main ahora requiere 0.12+.
     {
       'nvim-treesitter/nvim-treesitter',
-      version = 'v0.10.0',
-      build = ':TSUpdate',
-      event = { 'BufReadPost', 'BufNewFile' },
+      build = ':TSUpdate',                             -- Command to run after installation to get parsers
+      event = { 'BufReadPost', 'BufNewFile' },         -- Load on file open for better performance
       dependencies = {
-        -- FIX: Removidos playground y refactor (obsoletos en nvim-treesitter v1.0+/nvim 0.11+)
+        'nvim-treesitter/playground',                  -- Optional: for debugging treesitter queries
         'nvim-treesitter/nvim-treesitter-textobjects', -- Essential for your text objects
+        'nvim-treesitter/nvim-treesitter-refactor',    -- Optional: for refactoring with treesitter
         'JoosepAlviste/nvim-ts-context-commentstring', -- Improves commenting for different languages
         -- 'p00f/nvim-ts-rainbow', -- nvim-treesitter now includes rainbow parens, consider removing this if using built-in
       },
       -- Config `ensure_installed` etc. will be in your treesitter.lua
     },
-    { 'nvim-treesitter/nvim-treesitter-context', event = { 'BufReadPost', 'BufNewFile' } }, -- Show current scope context
+    { 'nvim-treesitter/nvim-treesitter-context' }, -- Show current scope context
 
     -- Autotag
-    {
-      'windwp/nvim-ts-autotag',
-      event = { 'BufReadPost', 'BufNewFile' },
-      opts = {
-        enable_close = true,
-        enable_rename = true,
-        enable_close_on_slash = false,
-      },
-    }, -- Auto close/rename HTML/XML tags (uses Tree-sitter)
+    { 'windwp/nvim-ts-autotag' }, -- Auto close/rename HTML/XML tags (uses Tree-sitter)
 
     -- Autopairs
-    { 'windwp/nvim-autopairs', event = 'InsertEnter' }, -- Auto-closes parentheses, quotes, etc.
+    { 'windwp/nvim-autopairs' }, -- Auto-closes parentheses, quotes, etc.
 
     -- Comments
-    { 'terrortylor/nvim-comment', keys = { { '<leader>/', mode = { 'n', 'v' } } }, opts = {} }, -- Toggling comments
+    { 'terrortylor/nvim-comment' }, -- Toggling comments
 
     -- --- LSP (Language Server Protocol) ---
     { 'neovim/nvim-lspconfig' },                                   -- Core Neovim LSP client
     { 'mason-org/mason.nvim' },                                    -- Universal package manager for LSP, DAP, Linters, Formatters
     { 'mason-org/mason-lspconfig.nvim' },                          -- Bridges Mason and Nvim-LSPconfig
-    -- FIX: null-ls.nvim está archivado y usa vim.tbl_add_reverse_lookup (deprecado en nvim 0.11+).
-    -- Migrado a none-ls.nvim (fork community-maintained), drop-in replacement.
-    { 'nvimtools/none-ls.nvim' },
-    { 'jay-babu/mason-null-ls.nvim' },                             -- Bridges Mason y none-ls/null-ls
+    { 'jose-elias-alvarez/null-ls.nvim' },                         -- For formatters and linters not covered by LSP (e.g., Black, Prettier)
     { 'onsails/lspkind.nvim' },                                    -- Icons for LSP autocompletion (requires nvim-cmp integration)
-    { 'glepnir/lspsaga.nvim', branch = 'main', event = 'LspAttach' }, -- Enhanced LSP UI (diagnostics, code actions, etc.)
+    { 'glepnir/lspsaga.nvim',                   branch = 'main' }, -- Enhanced LSP UI (diagnostics, code actions, etc.)
     -- { 'VonHeikemen/lsp-zero.nvim' }, -- lsp-zero is an *LSP starter kit*. If you're manually configuring
     --                                  -- mason, mason-lspconfig, null-ls, and nvim-cmp, lsp-zero might be redundant
     --                                  -- or cause conflicts if you don't use its full features.
@@ -146,16 +116,10 @@ require('lazy').setup(
     -- --- Fuzzy Finder ---
     {
       'nvim-telescope/telescope.nvim',
-      branch = '0.1.x',
-      event = 'VeryLazy',
-      keys = {
-        { '<C-p>', mode = 'n' },
-        { '<leader>fg', mode = 'n' },
-        { '<leader>fb', mode = 'n' },
-      },
+      branch = '0.1.x', -- Stick to stable 0.1.x branch
       dependencies = { 'nvim-lua/plenary.nvim' }
     },
-    { 'nvim-telescope/telescope-symbols.nvim', event = 'VeryLazy' },
+    { 'nvim-telescope/telescope-symbols.nvim' }, -- For finding symbols (requires ctags or LSP)
 
     -- --- File Explorer ---
     { 'nvim-tree/nvim-tree.lua' },
@@ -165,31 +129,10 @@ require('lazy').setup(
 
     -- --- Utilities & Quality of Life ---
     -- Keymaps Helper
-    {
-      'folke/which-key.nvim',
-      event = 'VeryLazy',
-      config = function()
-        local wk = require('which-key')
-        wk.add({
-          { '<leader>w',  ':w<cr>',                  desc = 'Save' },
-          { '<leader>q',  ':q<cr>',                  desc = 'Quit' },
-          { '<leader>Q',  ':q!<cr>',                 desc = 'Quit!' },
-          { '<leader>W',  ':wq<cr>',                 desc = 'Save and Quit' },
-          { '<leader>n',  ':nzzzv<cr>',              desc = 'Next search result' },
-          { '<leader>N',  ':Nzzzv<cr>',              desc = 'Previous search result' },
-          { '<leader>x',  ':bd<cr>',                 desc = 'Close buffer' },
-          { '<leader>m',  ':b#<cr>',                 desc = 'Last buffer' },
-          { '<leader><left>',  ':vertical resize -20<cr>', desc = 'Decrease window width' },
-          { '<leader><right>', ':vertical resize +20<cr>', desc = 'Increase window width' },
-          { '<leader><up>',    ':resize +10<cr>',          desc = 'Increase window height' },
-          { '<leader><down>',  ':resize -10<cr>',          desc = 'Decrease window height' },
-          { '<leader>p',  ':bp<cr>',                 desc = 'Previous buffer' },
-        })
-      end,
-    },
+    { 'folke/which-key.nvim' },
 
     -- Autosave
-    { 'Pocco81/auto-save.nvim', event = { 'BufReadPost', 'BufNewFile' }, opts = {} },
+    { 'Pocco81/auto-save.nvim' },
 
     -- Markdown Preview
     {
@@ -212,14 +155,13 @@ require('lazy').setup(
     },
 
     -- Live Server (for web development)
-    -- FIX: live-server.nvim deprecó require('live-server').setup() en favor de vim.g.live_server
     {
       'barrett-ruth/live-server.nvim',
-      build = 'bun add -g live-server',
-      cmd = { 'LiveServerStart', 'LiveServerStop', 'LiveServerToggle' },
-      config = function()
-        vim.g.live_server = {}
-      end,
+      build = 'pnpm add -g live-server',                                 -- Ensure you have pnpm installed globally
+      cmd = { 'LiveServerStart', 'LiveServerStop', 'LiveServerToggle' }, -- Add LiveServerToggle to cmd
+      config = true                                                      -- This means it will load and call `require('live-server').setup({})`
+      -- If you have a separate `liveserver.lua` for setup, set this to `false`
+      -- and ensure your `liveserver.lua` is required.
     },
 
     -- Code Snapshot
@@ -227,17 +169,6 @@ require('lazy').setup(
       'mistricky/codesnap.nvim',
       as = 'codesnap',
       build = 'make build_generator',
-      cmd = { 'CodeSnap', 'CodeSnapSave' },
-      keys = { { '<leader>ca', mode = 'x' }, { '<leader>cs', mode = 'x' } },
-      opts = {
-        save_path = '~/Pictures',
-        has_breadcrumb = false,
-        bg_color = '#2e3440',
-        watermark = 'Datolytix',
-        has_line_number = true,
-        title = 'Datolytix',
-        mac_window_bar = true,
-      },
     },
 
     -- Flash: Search and jump (highly efficient navigation)
@@ -262,27 +193,21 @@ require('lazy').setup(
 
     -- --- Language Specific Plugins ---
     -- Python
-    -- FIX: vim-python-pep8-indent removido (Vimscript legacy). Treesitter indent cubre Python.
-    -- { 'Vimjas/vim-python-pep8-indent' },
+    { 'Vimjas/vim-python-pep8-indent' }, -- Legacy Python indentation, may conflict with Tree-sitter indent
     -- Consider using: `nvim-treesitter-textobjects`'s python-specific queries for better indentation.
 
     -- Rust
-    { 'rust-lang/rust.vim', ft = 'rust' },
+    { 'rust-lang/rust.vim' },
 
     -- HTML/CSS/JS (Emmet)
-    { 'mattn/emmet-vim', ft = { 'html', 'css', 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' } },
+    { 'mattn/emmet-vim' },
 
     -- --- Debugger ---
     {
-      'mfussenegger/nvim-dap',
-      event = 'VeryLazy',
-      keys = {
-        { '<F9>', function() require('dap').toggle_breakpoint() end, desc = 'DAP Toggle Breakpoint' },
-        { '<F10>', function() require('dap').continue() end, desc = 'DAP Continue' },
-      },
+      'mfussenegger/nvim-dap',   -- Debug Adapter Protocol client
       dependencies = {
-        'rcarriga/nvim-dap-ui',
-        'nvim-neotest/nvim-nio',
+        'rcarriga/nvim-dap-ui',  -- UI for DAP
+        'nvim-neotest/nvim-nio', -- Dependency for nvim-dap-ui
       }
     },
 

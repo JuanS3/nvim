@@ -20,9 +20,10 @@ require('plugins.lazy')
 
 --- Theme and UI Plugins ---
 -- Load your color scheme and theme.
-require('plugins.theme')
+require('plugins.colors') -- If 'colors.lua' is solely for loading the color scheme
+require('plugins.theme')  -- If 'theme.lua' sets up the main theme
 require('plugins.indent')
-require('plugins.noice')
+require('plugins.noice')  -- Noice changes the UI, can be loaded before or after lualine/bufferline
 require('plugins.bufferline')
 require('plugins.lualine')
 
@@ -32,15 +33,14 @@ require('plugins.treesitter')
 require('plugins.telescope')
 require('plugins.nvtree')
 require('plugins.autopairs')
--- FIX: Los siguientes plugins se configuran ahora vía lazy.nvim (lazy loading):
--- require('plugins.comment')     -> nvim-comment: lazy por keys+opts en lazy.lua
--- require('plugins.autotag')     -> nvim-ts-autotag: lazy por event+opts en lazy.lua
--- require('plugins.whichkey')    -> which-key: lazy por event; config movida a lazy.lua
--- require('plugins.codesnap')    -> codesnap: lazy por cmd+keys+opts en lazy.lua
--- require('plugins.specs')       -> specs: lazy por event+opts+keys en lazy.lua
+require('plugins.comment')
 require('plugins.markdown')
+require('plugins.autotag')
+require('plugins.whichkey')
 require('plugins.liveserver')
+require('plugins.codesnap')
 require('plugins.notes')
+require('plugins.specs')
 
 
 --- LSP and Autocompletion Plugins (CRITICAL ORDER) ---

@@ -13,13 +13,11 @@ vim.api.nvim_set_keymap('n', '<leader>v',
   { noremap = true, silent = true }
 )
 
--- FIX: specs.nvim sobreescribía 'n'/'N' de keymaps.lua, perdiendo el centrado de pantalla.
--- Se preserva 'nzzzv' / 'Nzzzv' antes de invocar specs.show_specs().
 vim.api.nvim_set_keymap('n', 'n',
-  'nzzzv:lua require("specs").show_specs()<CR>',
+  'n:lua require("specs").show_specs()<CR>',
   { noremap = true, silent = true }
 )
 vim.api.nvim_set_keymap('n', 'N',
-  'Nzzzv:lua require("specs").show_specs()<CR>',
+  'N:lua require("specs").show_specs()<CR>',
   { noremap = true, silent = true }
 )

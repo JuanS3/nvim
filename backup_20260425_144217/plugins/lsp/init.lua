@@ -8,9 +8,7 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_create_autocmd('BufWritePre', {
       group = vim.api.nvim_create_augroup('LspFormatting', { clear = true }),
       buffer = bufnr,
-      -- FIX: async = false bloqueaba el editor hasta terminar el formateo.
-      -- async = true delega al LSP sin bloquear la UI.
-      callback = function() vim.lsp.buf.format({ bufnr = bufnr, async = true }) end,
+      callback = function() vim.lsp.buf.format({ bufnr = bufnr, async = false }) end,
       desc = 'Format on save',
     })
   end

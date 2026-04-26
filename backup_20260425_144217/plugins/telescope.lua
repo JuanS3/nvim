@@ -43,14 +43,7 @@ require('telescope').setup {
       },
     },
     -- Adjust preview window behavior
-    -- FIX: Añadidos patrones comunes de Python/Data/Infra para ignorar
-    file_ignore_patterns = {
-      "%.git/", "node_modules/", "%.DS_Store",
-      "__pycache__/", "%.pyc", "%.pyo", "%.egg%-info/",
-      "%.venv/", "venv/", "%.pytest_cache/", "%.mypy_cache/",
-      "target/", "%.cargo/", "dist/", "build/",
-      "%.terraform/", "%.tfstate", "%.lock.hcl",
-    },
+    file_ignore_patterns = { "%.git/", "node_modules/", "%.DS_Store" },
     -- layout_config = {
     --   prompt_position = "top",
     --   preview_width = 0.6,
